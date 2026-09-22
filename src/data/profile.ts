@@ -15,6 +15,11 @@ export const profile = {
     lead: "Building the plumbing",
     accent: "behind job matching.",
   },
+  stats: [
+    { label: "Years shipping", value: "8+" },
+    { label: "Services in current platform", value: "11" },
+    { label: "Admin modules built end-to-end", value: "9" },
+  ],
   about: [
     "I'm a full-stack engineer with eight years across React/TypeScript frontends and Node.js backends — currently building an AI-powered recruitment platform: a TypeScript workspace of eleven services spanning React SPAs, NestJS APIs, OpenAI-powered matching, and Qdrant vector search.",
     "I've designed and shipped a nine-module admin platform end-to-end on a custom design system, built AI chat support on OpenAI, and I'm comfortable owning a feature from the first wireframe through API integration to production. Right now I'm going deeper into AI application engineering — RAG pipelines, embeddings, and the systems that make them reliable.",

@@ -1,70 +1,169 @@
 ---
 import { profile } from "../data/profile";
+const [first, ...rest] = profile.fullName.split(" ");
+const lastName = rest.join(" ");
 ---
 
 <header class="hero wrap">
   <nav class="masthead" aria-label="Main navigation">
-    <span class="masthead-name">{profile.fullName}</span>
+    <span class="masthead-name"
+      >{profile.name.toLowerCase()}<span class="dim">.dev</span></span
+    >
     <div class="masthead-links">
-      <a href="#experience">Work</a>
-      <a href="#contact">Contact</a>
+      <a href="#experience">work</a>
+      <a href="#contact">contact</a>
+      <span class="status"><span class="pulse" aria-hidden="true"></span> open to work</span>
     </div>
   </nav>
 
   <h1 class="headline">
-    {profile.headline.lead}
-    <em>{profile.headline.accent}</em>
+    {first}
+    <span class="accent">{lastName}</span>
   </h1>
 
+  <p class="tagline reveal">
+    <span class="comment">// {profile.headline.lead.toLowerCase()} {profile.headline.accent}</span>
+  </p>
+
+  <dl class="stats reveal">
+    {
+      profile.stats.map((s) => (
+        <div class="stat">
+          <dt>{s.label}</dt>
+          <dd>{s.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
   <div class="byline reveal">
-    <span>{profile.role}</span>
+    <span>{profile.role.toLowerCase()}</span>
     <span aria-hidden="true">·</span>
-    <span>{profile.location}</span>
+    <span>{profile.location.toLowerCase()}</span>
     <span aria-hidden="true">·</span>
-    <a href={profile.links.github}>GitHub</a>
+    <a href={profile.links.github}>github</a>
     <span aria-hidden="true">·</span>
-    <a href={profile.links.linkedin}>LinkedIn</a>
+    <a href={profile.links.linkedin}>linkedin</a>
   </div>
 </header>
 
 <style>
   .hero {
-    min-height: 88svh;
+    min-height: 92svh;
     display: flex;
     flex-direction: column;
-    padding-block: 1.75rem clamp(2rem, 6vw, 4rem);
+    padding-block: 1.5rem clamp(2rem, 5vw, 3.5rem);
   }
 
   .masthead {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
     font-size: var(--text-small);
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--line);
     padding-bottom: 1rem;
+  }
+
+  .masthead-name {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .dim {
+    color: var(--text-soft);
+    font-weight: 400;
+  }
+
+  .masthead-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
   }
 
   .masthead a {
     text-decoration: none;
-    margin-left: 1.5rem;
+  }
+
+  .status {
+    color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .pulse {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: oklch(75% 0.18 145);
   }
 
   .headline {
-    font-family: var(--font-display);
     font-size: var(--text-hero);
-    font-weight: 560;
-    line-height: 0.98;
-    letter-spacing: -0.02em;
-    margin-block: auto;
-    max-width: 11em;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-top: auto;
     text-wrap: balance;
   }
 
-  .headline em {
+  .headline .accent {
+    color: var(--accent);
+  }
+
+  .tagline {
+    margin-top: 1.25rem;
+    font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.2rem);
+  }
+
+  .comment {
+    color: var(--accent-deep);
     font-style: italic;
+  }
+
+  .stats {
+    margin-block: clamp(2rem, 5vw, 3.5rem) auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .stat {
+    padding: 1.1rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .stat + .stat {
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 768px) {
+    .stat + .stat {
+      border-top: none;
+      border-left: 1px solid var(--line);
+    }
+  }
+
+  .stat dt {
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .stat dd {
+    margin: 0;
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    font-weight: 700;
     color: var(--accent);
   }
 
@@ -73,11 +172,9 @@ import { profile } from "../data/profile";
     flex-wrap: wrap;
     gap: 0.75rem;
     font-size: var(--text-small);
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    border-top: 1px solid var(--rule);
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    border-top: 1px solid var(--line);
     padding-top: 1.25rem;
   }
 </style>

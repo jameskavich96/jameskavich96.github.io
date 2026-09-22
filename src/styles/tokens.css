@@ -1,24 +1,23 @@
 :root {
-  /* warm editorial paper + ink + vermilion accent */
-  --paper: oklch(97.5% 0.01 85);
-  --paper-deep: oklch(94% 0.016 85);
-  --ink: oklch(21% 0.02 60);
-  --ink-soft: oklch(46% 0.018 60);
-  --accent: oklch(54% 0.19 32);
-  --rule: oklch(85% 0.014 85);
+  /* terminal: warm near-black, phosphor-gray text, amber accent */
+  --bg: oklch(14% 0.008 80);
+  --panel: oklch(17.5% 0.01 80);
+  --text: oklch(88% 0.01 80);
+  --text-soft: oklch(62% 0.012 80);
+  --accent: oklch(78% 0.14 75);
+  --accent-deep: oklch(68% 0.15 70);
+  --line: oklch(100% 0 0 / 0.09);
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-small: 0.8125rem;
-  --text-hero: clamp(3rem, 1.25rem + 9.5vw, 8.75rem);
-  --text-h2: clamp(1.9rem, 1.3rem + 2.6vw, 3.4rem);
-  --text-role: clamp(1.4rem, 1.1rem + 1.4vw, 2.2rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  --text-small: 0.75rem;
+  --text-hero: clamp(2.6rem, 1rem + 8.5vw, 7.5rem);
+  --text-role: clamp(1.15rem, 0.95rem + 1vw, 1.7rem);
 
-  --space-section: clamp(5rem, 3rem + 8vw, 11rem);
+  --space-section: clamp(5rem, 3rem + 8vw, 10rem);
   --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
-  --measure: 62ch;
+  --measure: 68ch;
 
   --duration: 700ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

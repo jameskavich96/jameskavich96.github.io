@@ -4,7 +4,7 @@ import { profile } from "../data/profile";
 
 <section class="section" aria-labelledby="about-heading">
   <div class="wrap section-grid">
-    <p class="kicker"><span class="no">01</span>About</p>
+    <p class="kicker"><span class="no">01</span>$ whoami</p>
     <div class="reveal">
       <h2 id="about-heading" class="sr-only">About</h2>
       {profile.about.map((para, i) => <p class:list={["about-para", { lede: i === 0 }]}>{para}</p>)}
@@ -18,23 +18,13 @@ import { profile } from "../data/profile";
   }
 
   .about-para + .about-para {
-    margin-top: 1.25rem;
-    color: var(--ink-soft);
+    margin-top: 1.5rem;
+    color: var(--text-soft);
   }
 
   .lede {
-    font-family: var(--font-display);
-    font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.9rem);
-    line-height: 1.4;
-    font-weight: 460;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+    font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem);
+    line-height: 1.7;
+    font-weight: 500;
   }
 </style>
