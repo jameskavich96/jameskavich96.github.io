@@ -85,7 +85,7 @@ export const experience: Role[] = [
     summary:
       "C#/.NET automation and a React app that replaced the recruitment team's manual workflows, saving 10+ hours weekly.",
     bullets: [],
-    refs: [{ label: "internal projects" }],
+    refs: [{ label: "techmahindra.com", href: "https://www.techmahindra.com" }],
   },
   {
     company: "M Lhuillier Financial Services",
@@ -95,7 +95,7 @@ export const experience: Role[] = [
     summary:
       "Migrated a C# desktop app to React and rewrote its APIs in Node.js for better performance and accessibility.",
     bullets: [],
-    refs: [{ label: "internal projects" }],
+    refs: [{ label: "mlhuillier.com", href: "https://mlhuillier.com" }],
   },
 ];
 
