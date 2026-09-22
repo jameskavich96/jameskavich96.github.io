@@ -28,15 +28,19 @@ export const profile = {
 
 export interface Role {
   company: string;
+  companyUrl: string;
   title: string;
   period: string;
   summary: string;
   bullets: string[];
+  /** client/project references shown in the card footer; no href = plain label */
+  refs: { label: string; href?: string }[];
 }
 
 export const experience: Role[] = [
   {
     company: "Jobvious",
+    companyUrl: "https://itsjobvious.com",
     title: "Full Stack Developer",
     period: "Apr 2025 — Present",
     summary:
@@ -46,9 +50,11 @@ export const experience: Role[] = [
       "Built AI chat support on OpenAI for profile completion, job-matching queries, and referral guidance — cutting manual support work for the operations team.",
       "Shipped participant-facing onboarding, resume upload, and referral workflows as mobile-first UI, plus real-time messaging and notifications over Socket.io.",
     ],
+    refs: [{ label: "itsjobvious.com", href: "https://itsjobvious.com" }],
   },
   {
     company: "Accenture",
+    companyUrl: "https://www.accenture.com/en",
     title: "Senior Software Engineer",
     period: "Aug 2022 — Apr 2025",
     summary: "Enterprise web applications for global clients.",
@@ -56,30 +62,40 @@ export const experience: Role[] = [
       "Built mobile-responsive React/Node.js applications and designed MySQL/PostgreSQL schemas for scalable systems.",
       "Cut deployment time ~30% via CI/CD pipelines (Jenkins, Docker, AWS) and improved load times ~25% through profiling and bottleneck resolution.",
     ],
+    refs: [
+      { label: "philip morris intl (client)", href: "https://www.pmi.com" },
+      { label: "ph.pmiandu.com", href: "https://ph.pmiandu.com" },
+    ],
   },
   {
     company: "GoTeam",
+    companyUrl: "https://go.team",
     title: "Back End Developer",
     period: "Jun 2021 — Aug 2022",
     summary:
       "Node.js/Express backend services — features, performance fixes (~20% faster API responses), and test coverage.",
     bullets: [],
+    refs: [{ label: "blackmoth.com (client)", href: "https://www.blackmoth.com" }],
   },
   {
     company: "Tech Mahindra",
+    companyUrl: "https://www.techmahindra.com",
     title: "Software Engineer",
     period: "Mar 2020 — Jun 2021",
     summary:
       "C#/.NET automation and a React app that replaced the recruitment team's manual workflows, saving 10+ hours weekly.",
     bullets: [],
+    refs: [{ label: "internal projects" }],
   },
   {
     company: "M Lhuillier Financial Services",
+    companyUrl: "https://mlhuillier.com",
     title: "Software Engineer",
     period: "Jun 2018 — Mar 2020",
     summary:
       "Migrated a C# desktop app to React and rewrote its APIs in Node.js for better performance and accessibility.",
     bullets: [],
+    refs: [{ label: "internal projects" }],
   },
 ];
 

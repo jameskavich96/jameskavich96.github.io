@@ -7,6 +7,7 @@
   --accent: oklch(78% 0.14 75);
   --accent-deep: oklch(68% 0.15 70);
   --line: oklch(100% 0 0 / 0.09);
+  --grid: oklch(100% 0 0 / 0.035);
 
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 

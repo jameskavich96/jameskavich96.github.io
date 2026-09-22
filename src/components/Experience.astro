@@ -14,7 +14,10 @@ import { experience } from "../data/profile";
               <span class="ghost-no" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <div class="role-head">
                 <h3 class="role-title">
-                  {role.title} <span class="role-at">@ {role.company}</span>
+                  {role.title}{" "}
+                  <a class="role-at" href={role.companyUrl} target="_blank" rel="noopener noreferrer"
+                    >@ {role.company}</a
+                  >
                 </h3>
                 <p class="role-period">{role.period}</p>
               </div>
@@ -26,6 +29,17 @@ import { experience } from "../data/profile";
                   ))}
                 </ul>
               )}
+              <div class="role-refs">
+                {role.refs.map((ref) =>
+                  ref.href ? (
+                    <a href={ref.href} target="_blank" rel="noopener noreferrer">
+                      {ref.label} <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <span class="ref-note">{ref.label}</span>
+                  ),
+                )}
+              </div>
             </li>
           ))
         }
@@ -84,6 +98,12 @@ import { experience } from "../data/profile";
 
   .role-at {
     color: var(--accent);
+    text-decoration: none;
+  }
+
+  .role-at:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
   }
 
   .role-period {
@@ -119,5 +139,30 @@ import { experience } from "../data/profile";
     position: absolute;
     left: 0;
     color: var(--accent);
+  }
+
+  .role-refs {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+  }
+
+  .role-refs a {
+    color: var(--accent-deep);
+    text-decoration: none;
+  }
+
+  .role-refs a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .ref-note {
+    color: var(--text-soft);
   }
 </style>
