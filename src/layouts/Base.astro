@@ -1,13 +1,43 @@
 ---
 import "../styles/global.css";
-import { profile } from "../data/profile";
+import { profile, SITE_URL } from "../data/profile";
 
 interface Props {
   title?: string;
+  description?: string;
+  /** path for the canonical URL, e.g. "/" or "/case-studies/jobvious-admin/" */
+  path?: string;
 }
 
-const { title = `${profile.fullName} — ${profile.role}` } = Astro.props;
-const description = `${profile.headline.lead} ${profile.headline.accent} Portfolio of ${profile.fullName}, ${profile.role.toLowerCase()}.`;
+const {
+  title = `${profile.fullName} — ${profile.role}`,
+  description = `${profile.headline.lead} ${profile.headline.accent} Portfolio of ${profile.fullName}, ${profile.role.toLowerCase()} in ${profile.location} with 8+ years across React, TypeScript, NestJS, and AI integration.`,
+  path = "/",
+} = Astro.props;
+
+const canonical = new URL(path, SITE_URL).href;
+
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.fullName,
+  jobTitle: profile.role,
+  email: `mailto:${profile.email}`,
+  url: SITE_URL,
+  address: { "@type": "PostalAddress", addressLocality: "Cebu", addressCountry: "PH" },
+  sameAs: [profile.links.github, profile.links.linkedin],
+  worksFor: { "@type": "Organization", name: "Jobvious", url: "https://itsjobvious.com" },
+  knowsAbout: [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "NestJS",
+    "AI integration",
+    "OpenAI API",
+    "RAG pipelines",
+    "Vector search",
+  ],
+});
 ---
 
 <!doctype html>
@@ -20,6 +50,20 @@ const description = `${profile.headline.lead} ${profile.headline.accent} Portfol
       document.documentElement.classList.add("js");
     </script>
     <meta name="description" content={description} />
+    <meta name="author" content={profile.fullName} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={profile.fullName} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" set:html={personJsonLd} is:inline />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

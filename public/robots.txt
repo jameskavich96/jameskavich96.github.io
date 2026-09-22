@@ -1,0 +1,7 @@
+# All crawlers welcome — including AI crawlers (GPTBot, ClaudeBot,
+# PerplexityBot, Google-Extended): this is a portfolio, index away.
+User-agent: *
+Allow: /
+
+# TODO(james): once you have a domain, add:
+# Sitemap: https://<your-domain>/sitemap.xml

@@ -1,5 +1,9 @@
 // Single source of truth for page content. Edit here, never in components.
 
+// TODO(james): replace with your real domain once you have one — used for
+// canonical URLs, Open Graph, JSON-LD, and llms.txt.
+export const SITE_URL = "https://jamesdelosreyes.dev";
+
 export const profile = {
   name: "James",
   fullName: "James Delos Reyes",
@@ -50,7 +54,10 @@ export const experience: Role[] = [
       "Built AI chat support on OpenAI for profile completion, job-matching queries, and referral guidance — cutting manual support work for the operations team.",
       "Shipped participant-facing onboarding, resume upload, and referral workflows as mobile-first UI, plus real-time messaging and notifications over Socket.io.",
     ],
-    refs: [{ label: "itsjobvious.com", href: "https://itsjobvious.com" }],
+    refs: [
+      { label: "case study", href: "/case-studies/jobvious-admin/" },
+      { label: "itsjobvious.com", href: "https://itsjobvious.com" },
+    ],
   },
   {
     company: "Accenture",

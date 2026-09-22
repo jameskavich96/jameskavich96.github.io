@@ -30,15 +30,19 @@ import { experience } from "../data/profile";
                 </ul>
               )}
               <div class="role-refs">
-                {role.refs.map((ref) =>
-                  ref.href ? (
-                    <a href={ref.href} target="_blank" rel="noopener noreferrer">
-                      {ref.label} <span aria-hidden="true">↗</span>
+                {role.refs.map((ref) => {
+                  if (!ref.href) return <span class="ref-note">{ref.label}</span>;
+                  const external = ref.href.startsWith("http");
+                  return (
+                    <a
+                      href={ref.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                    >
+                      {ref.label} <span aria-hidden="true">{external ? "↗" : "→"}</span>
                     </a>
-                  ) : (
-                    <span class="ref-note">{ref.label}</span>
-                  ),
-                )}
+                  );
+                })}
               </div>
             </li>
           ))

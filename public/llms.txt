@@ -1,0 +1,44 @@
+# James Delos Reyes
+
+> Full-stack engineer in Cebu, Philippines with 8+ years across React/TypeScript
+> frontends and Node.js backends, currently building an AI-powered recruitment
+> platform (Jobvious). Specializes in end-to-end feature ownership: UI, API
+> integration, and AI features (OpenAI, RAG pipelines, Qdrant vector search).
+
+## Current role
+
+Full Stack Developer at Jobvious (Apr 2025 – present) — AI-powered recruitment
+and referral platform. TypeScript workspace of 11 services: React SPAs (Vite),
+NestJS APIs, MySQL/Prisma, Redis, Socket.io, OpenAI-powered matching with
+Qdrant vector search.
+
+- Designed and built the full redesign of the admin platform: a 9-module
+  React + TypeScript SPA on a custom design system with hand-coded SVG data
+  visualizations. Case study: /case-studies/jobvious-admin/
+- Built AI chat support (OpenAI) for profile completion, job-matching queries,
+  and referral guidance.
+- Shipped participant-facing onboarding, resume upload, and referral workflows
+  plus real-time messaging over Socket.io.
+
+## Previous roles
+
+- Senior Software Engineer, Accenture (2022–2025) — enterprise React/Node.js
+  apps; client work incl. Philip Morris International (ph.pmiandu.com).
+- Back End Developer, GoTeam (2021–2022) — Node.js/Express services; client
+  work incl. Blackmoth.
+- Software Engineer, Tech Mahindra (2020–2021) — C#/.NET automation, React.
+- Software Engineer, M Lhuillier Financial Services (2018–2020) — C#-to-React
+  migration, Node.js APIs.
+
+## Skills
+
+Core: TypeScript, JavaScript, React, Node.js, Tailwind, Radix UI, TanStack
+Query, Zustand, MySQL, PostgreSQL.
+Working knowledge: NestJS, Prisma, Socket.io, OpenAI API, Docker, GitHub
+Actions, Vitest, MongoDB, AWS S3.
+Familiar: Redis, BullMQ, Qdrant, RAG pipelines, Playwright, Strapi.
+
+## Contact
+
+- Email: sabakhadhaoy@gmail.com
+- LinkedIn: https://www.linkedin.com/in/jamesakvich
