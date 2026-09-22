@@ -82,9 +82,10 @@ export const experience: Role[] = [
     companyUrl: "https://go.team",
     title: "Back End Developer",
     period: "Jun 2021 — Aug 2022",
-    summary: "Node.js/Express backend services for client work, incl. Blackmoth trucking.",
+    summary:
+      "Node.js/Express backend services for client work, incl. Black Moth — intelligent machine vision systems for mining and road infrastructure.",
     bullets: [
-      "Built the pothole-vision backend for Blackmoth's truck fleet: every ride captures route-tied pothole snapshots, and the next run over the same route sees the hazards coming via the truck's onboard system.",
+      "Built the pothole-vision backend for Black Moth's machine vision platform: every ride captures route-tied pothole snapshots, and heavy trucks on the next run over the same route see the hazards coming via the onboard system.",
       "Debugged and resolved performance issues across the backend, improving API response times ~20%.",
       "Wrote unit and integration tests as standard delivery, collaborating with frontend developers on API design.",
     ],

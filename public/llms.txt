@@ -27,9 +27,10 @@ Qdrant vector search.
   redeem pack promo codes for points), and an internal file-storage system
   used by Accenture teams globally (Mexico, PH, UK, Ireland...).
   Case study: /case-studies/accenture/
-- Back End Developer, GoTeam (2021–2022) — for trucking client Blackmoth:
-  route-aware pothole snapshots captured per ride and shown to drivers on the
-  next run over the same route. Case study: /case-studies/goteam/
+- Back End Developer, GoTeam (2021–2022) — for client Black Moth (intelligent
+  machine vision systems for mining and road infrastructure): route-aware
+  pothole snapshots captured per ride and shown to drivers on the next run
+  over the same route. Case study: /case-studies/goteam/
 - Software Engineer, Tech Mahindra (2020–2021) — one-click semi-automation of
   CSR agents' manual daily tasks (C#/.NET), ~40% efficiency gain.
   Case study: /case-studies/tech-mahindra/

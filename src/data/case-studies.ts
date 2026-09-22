@@ -145,14 +145,14 @@ export const caseStudies: CaseStudy[] = [
     order: "03",
     title: { lead: "Pothole Vision", accent: "for Trucking" },
     tagline: "// trucks that remember every pothole and warn the next run",
-    metaTitle: "Case Study: Pothole Vision for Blackmoth Trucking — James Delos Reyes",
+    metaTitle: "Case Study: Pothole Vision for Blackmoth — James Delos Reyes",
     metaDescription:
-      "Backend work at GoTeam for Blackmoth trucking: route-aware pothole snapshots captured per ride and surfaced to drivers on their next run over the same route.",
+      "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: route-aware pothole snapshots captured per ride and surfaced to drivers on their next run over the same route.",
     facts: [
       { label: "role", value: "back end developer" },
       { label: "period", value: "2021 — 2022" },
       { label: "company", value: "GoTeam ↗", href: "https://go.team" },
-      { label: "client", value: "Blackmoth ↗", href: "https://www.blackmoth.com" },
+      { label: "client", value: "Black Moth ↗", href: "https://www.blackmoth.com" },
     ],
     stack: ["Node.js", "Express", "REST APIs"],
     sections: [
@@ -160,14 +160,14 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
-          "Blackmoth runs heavy trucks on recurring routes. Potholes are more than a nuisance at that scale — they damage vehicles and cargo, and every driver hit them blind, every time, even on roads the fleet had driven the day before. The fleet had the knowledge; nothing captured it.",
+          "Black Moth is a leader in rugged, intelligent <strong>machine vision systems</strong> for mining and road infrastructure. Their clients run heavy trucks on recurring routes, where potholes are more than a nuisance — they damage vehicles and cargo, and every driver hit them blind, every time, even on roads the fleet had driven the day before. The fleets had the knowledge; nothing captured it.",
         ],
       },
       {
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "I built the backend services that give the fleet a <strong>memory of the road</strong>: each ride captures pothole snapshots, tied to the route, and the system integrates with the truck's onboard machine. On the next run over the same route, the driver gets a vision of what's ahead — hazards spotted by the trucks that came before.",
+          "I built the backend services that give Black Moth's vision platform a <strong>memory of the road</strong>: each ride captures pothole snapshots, tied to the route, and the platform integrates with the truck's onboard machine. On the next run over the same route, the driver gets a vision of what's ahead — hazards spotted by the trucks that came before.",
           "Alongside the feature work: performance fixes across the backend (~20% faster API responses) and unit/integration test coverage as standard delivery.",
         ],
       },
