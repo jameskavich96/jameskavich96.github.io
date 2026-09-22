@@ -2,9 +2,9 @@
 import { profile } from "../data/profile";
 ---
 
-<section class="section" aria-labelledby="about-heading">
+<section id="about" class="section" aria-labelledby="about-heading">
   <div class="wrap section-grid">
-    <p class="kicker"><span class="no">01</span>$ whoami</p>
+    <p class="kicker"><span class="no">01</span>about.md</p>
     <div class="reveal">
       <h2 id="about-heading" class="sr-only">About</h2>
       {profile.about.map((para, i) => <p class:list={["about-para", { lede: i === 0 }]}>{para}</p>)}

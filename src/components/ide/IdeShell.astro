@@ -1,0 +1,203 @@
+---
+// IDE frame for the index page: titlebar + explorer sidebar + tab strip + status bar.
+import TitleBar from "./TitleBar.astro";
+import StatusBar from "./StatusBar.astro";
+import { caseStudies } from "../../data/case-studies";
+
+const tabs = [
+  { label: "about.md", href: "#about" },
+  { label: "experience.md", href: "#experience" },
+  { label: "ai.md", href: "#ai" },
+  { label: "toolkit.json", href: "#toolkit" },
+  { label: "contact.sh", href: "#contact" },
+];
+---
+
+<div class="ide">
+  <TitleBar />
+  <div class="ide-body">
+    <aside class="explorer" aria-label="File explorer">
+      <p class="explorer-head">explorer</p>
+      <ul class="tree">
+        <li class="folder open">portfolio</li>
+        <li><a href="#about"><span class="icon md" aria-hidden="true"></span>about.md</a></li>
+        <li><a href="#experience"><span class="icon md" aria-hidden="true"></span>experience.md</a></li>
+        <li class="folder open nested">case-studies</li>
+        {
+          caseStudies.map((study) => (
+            <li class="nested-2">
+              <a href={`/case-studies/${study.slug}/`}>
+                <span class="icon md" aria-hidden="true" />
+                {study.slug}.md
+              </a>
+            </li>
+          ))
+        }
+        <li><a href="#ai"><span class="icon md" aria-hidden="true"></span>ai.md</a></li>
+        <li><a href="#toolkit"><span class="icon json" aria-hidden="true"></span>toolkit.json</a></li>
+        <li><a href="#contact"><span class="icon sh" aria-hidden="true"></span>contact.sh</a></li>
+      </ul>
+    </aside>
+
+    <div class="editor">
+      <nav class="tabstrip" aria-label="Main navigation">
+        {
+          tabs.map((tab, i) => (
+            <a class:list={["tab", { active: i === 0 }]} href={tab.href}>
+              {tab.label}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="editor-content">
+        <slot />
+      </div>
+    </div>
+  </div>
+  <StatusBar />
+</div>
+
+<style>
+  .ide-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    .ide-body {
+      grid-template-columns: 15rem minmax(0, 1fr);
+    }
+  }
+
+  .explorer {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .explorer {
+      display: block;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 1rem 0.75rem;
+      position: sticky;
+      top: var(--titlebar-h);
+      height: calc(100svh - var(--titlebar-h) - var(--status-h));
+      overflow-y: auto;
+      font-size: var(--text-small);
+    }
+  }
+
+  .explorer-head {
+    font-family: var(--font-ui);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-size: 0.68rem;
+    padding-inline: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .tree {
+    list-style: none;
+    padding: 0;
+    display: grid;
+  }
+
+  .tree li {
+    line-height: 2;
+  }
+
+  .tree a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: none;
+    padding: 0 0.5rem;
+    border-radius: 3px;
+    color: var(--text);
+  }
+
+  .tree a:hover {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+
+  .folder {
+    color: var(--text-soft);
+    padding-inline: 0.5rem;
+  }
+
+  .folder::before {
+    content: "▾ ";
+  }
+
+  .nested {
+    padding-left: 1rem;
+  }
+
+  .nested-2 a {
+    padding-left: 2rem;
+  }
+
+  .tree li:not(.folder):not(.nested-2) a {
+    padding-left: 1rem;
+  }
+
+  .icon {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 2px;
+    flex: none;
+  }
+
+  .icon.md {
+    background: var(--accent);
+  }
+
+  .icon.json {
+    background: var(--syn-func);
+  }
+
+  .icon.sh {
+    background: var(--syn-comment);
+  }
+
+  .tabstrip {
+    position: sticky;
+    top: var(--titlebar-h);
+    z-index: 20;
+    display: flex;
+    overflow-x: auto;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    height: var(--tabs-h);
+    scrollbar-width: none;
+  }
+
+  .tabstrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 1.1rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-right: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+
+  .tab.active {
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 var(--accent);
+  }
+</style>

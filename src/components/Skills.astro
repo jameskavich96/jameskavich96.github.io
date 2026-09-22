@@ -1,62 +1,47 @@
 ---
 import { skills } from "../data/profile";
+
+const toKey = (label: string) => label.toLowerCase().replace(/\s+/g, "_");
 ---
 
-<section class="section" aria-labelledby="skills-heading">
+<section id="toolkit" class="section" aria-labelledby="skills-heading">
   <div class="wrap section-grid">
-    <p class="kicker"><span class="no">04</span>$ ls ./toolkit</p>
-    <div class="groups reveal">
+    <p class="kicker"><span class="no">04</span>toolkit.json</p>
+    <div class="reveal">
       <h2 id="skills-heading" class="sr-only">Skills</h2>
-      {
-        skills.map((group) => (
-          <div class="group">
-            <h3 class="group-label"># {group.label.toLowerCase()}</h3>
-            <ul class="chips">
-              {group.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
+      <pre class="json"><code><span class="p">&#123;</span>
+{skills.map((group, gi) => (
+  <>  <span class="key">"{toKey(group.label)}"</span><span class="p">: [</span>
+{group.items.map((item, i) => (
+    <>    <span class="str">"{item}"</span><span class="p">{i < group.items.length - 1 ? "," : ""}</span>
+</>
+))}  <span class="p">]{gi < skills.length - 1 ? "," : ""}</span>
+</>
+))}<span class="p">&#125;</span></code></pre>
     </div>
   </div>
 </section>
 
 <style>
-  .groups {
-    display: grid;
-    gap: 2.25rem;
-  }
-
-  .group-label {
-    font-size: var(--text-small);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: lowercase;
-    color: var(--accent);
-    margin-bottom: 0.9rem;
-  }
-
-  .chips {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .chips li {
+  .json {
+    margin: 0;
     border: 1px solid var(--line);
     background: var(--panel);
-    padding: 0.35rem 0.85rem;
-    font-size: var(--text-small);
-    letter-spacing: 0.04em;
-    transition: border-color 200ms ease, color 200ms ease;
+    padding: 1.5rem clamp(1.25rem, 3vw, 2rem);
+    overflow-x: auto;
+    font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.95rem);
+    line-height: 2;
   }
 
-  .chips li:hover {
-    border-color: var(--accent-deep);
-    color: var(--accent);
+  .p {
+    color: var(--text-soft);
+  }
+
+  .key {
+    color: var(--syn-key);
+  }
+
+  .str {
+    color: var(--syn-string);
   }
 </style>

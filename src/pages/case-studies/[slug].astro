@@ -1,5 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
+import TitleBar from "../../components/ide/TitleBar.astro";
+import StatusBar from "../../components/ide/StatusBar.astro";
 import { profile } from "../../data/profile";
 import { caseStudies } from "../../data/case-studies";
 
@@ -15,12 +17,11 @@ const { study } = Astro.props;
   description={study.metaDescription}
   path={`/case-studies/${study.slug}/`}
 >
-  <div class="wrap">
-    <nav class="masthead" aria-label="Main navigation">
-      <a class="back" href="/">← cd ~</a>
-      <span class="dim">case study {study.order}</span>
-    </nav>
-  </div>
+  <TitleBar title={`case-studies/${study.slug}.md — portfolio`} />
+  <nav class="tabstrip" aria-label="Main navigation">
+    <a class="tab" href="/">← portfolio</a>
+    <span class="tab active">case-studies/{study.slug}.md</span>
+  </nav>
 
   <main class="wrap study">
     <header class="study-head">
@@ -91,18 +92,47 @@ const { study } = Astro.props;
       <a class="back" href="/">← back to portfolio</a>
     </footer>
   </main>
+  <StatusBar />
 </Base>
 
 <style>
-  .masthead {
+  .tabstrip {
+    position: sticky;
+    top: var(--titlebar-h);
+    z-index: 20;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: var(--text-small);
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    overflow-x: auto;
+    background: var(--panel);
     border-bottom: 1px solid var(--line);
-    padding-block: 1.5rem 1rem;
+    height: var(--tabs-h);
+    scrollbar-width: none;
+  }
+
+  .tabstrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 1.1rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-right: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  a.tab:hover {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+
+  .tab.active {
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 var(--accent);
   }
 
   .back {
@@ -112,10 +142,6 @@ const { study } = Astro.props;
 
   .back:hover {
     text-decoration: underline;
-  }
-
-  .dim {
-    color: var(--text-soft);
   }
 
   .study-head {

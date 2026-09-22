@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import IdeShell from "../components/ide/IdeShell.astro";
 import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
 import Experience from "../components/Experience.astro";
@@ -9,12 +10,14 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Base>
-  <Hero />
-  <main>
-    <About />
-    <Experience />
-    <AiSection />
-    <Skills />
-  </main>
-  <Footer />
+  <IdeShell>
+    <Hero />
+    <main>
+      <About />
+      <Experience />
+      <AiSection />
+      <Skills />
+    </main>
+    <Footer />
+  </IdeShell>
 </Base>
