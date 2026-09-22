@@ -15,13 +15,12 @@ const lastName = rest.join(" ");
   </nav>
 
   <h1 class="headline">
-    {first}
+    Dr. {first}
     <span class="accent">{lastName}</span>
   </h1>
 
   <p class="tagline reveal">
     <span class="comment">// {profile.headline.lead.toLowerCase()} {profile.headline.accent}</span>
-    <span class="dr-line">// {profile.drLine}</span>
   </p>
 
   <dl class="stats reveal">
@@ -126,14 +125,6 @@ const lastName = rest.join(" ");
   .comment {
     color: var(--accent-deep);
     font-style: italic;
-  }
-
-  .dr-line {
-    display: block;
-    margin-top: 0.4rem;
-    font-size: var(--text-small);
-    letter-spacing: 0.06em;
-    color: var(--text-soft);
   }
 
   .stats {

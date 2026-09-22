@@ -18,8 +18,6 @@ export const profile = {
     lead: "React frontends, Node backends,",
     accent: "and the AI in between.",
   },
-  // the DR bit: Delos Reyes → dr. → development doctor
-  drLine: "dr. = delos reyes — the development doctor. i diagnose, treat, and ship.",
   stats: [
     { label: "Years shipping", value: "8+" },
     { label: "Production systems built", value: "10+" },
