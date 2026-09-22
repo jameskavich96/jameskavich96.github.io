@@ -71,6 +71,10 @@ const tabs = [
   };
 
   const update = () => {
+    // back at the very top: drop any #hash from the URL
+    if (window.scrollY < 40 && location.hash) {
+      history.replaceState(null, "", location.pathname);
+    }
     // at the very bottom, the last (short) section wins even if it never crosses the probe
     const atBottom =
       window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
