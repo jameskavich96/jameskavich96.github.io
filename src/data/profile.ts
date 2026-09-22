@@ -13,6 +13,8 @@ export const profile = {
   links: {
     github: "https://github.com/jameskavich96",
     linkedin: "https://www.linkedin.com/in/jamesakvich",
+    // phone number lives in the PDF only, deliberately off the crawlable page
+    resume: "/james-delos-reyes-cv.pdf",
   },
   headline: {
     lead: "React frontends, Node backends,",

@@ -16,7 +16,8 @@ const year = new Date().getFullYear();
     <div class="colophon">
       <span>{profile.email}</span>
       <span>
-        <a href={profile.links.github}>github</a> · <a href={profile.links.linkedin}>linkedin</a>
+        <a href={profile.links.github}>github</a> · <a href={profile.links.linkedin}>linkedin</a> ·
+        <a href={profile.links.resume} download>resume.pdf ↓</a>
       </span>
       <span>© {year} {profile.fullName.toLowerCase()}</span>
     </div>
