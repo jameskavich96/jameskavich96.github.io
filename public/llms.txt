@@ -37,6 +37,15 @@ Qdrant vector search.
   nationwide pawn-system teller tools from C# desktop to React web, retiring
   the branch-local server + sync-tool layer. Case study: /case-studies/mlhuillier/
 
+## AI engineering
+
+Ships AI inside products, not just AI-assisted coding: OpenAI chat support in
+production (profile completion, job-match questions, referral guidance) and a
+matching pipeline (jobs/candidates → OpenAI embeddings → Qdrant vector search
+→ scored matches). Treats models as unreliable dependencies: validated
+structured outputs, fallbacks, observability. Currently going deeper into RAG
+pipelines, embedding strategy, and self-hosted models.
+
 ## Skills
 
 Core: TypeScript, JavaScript, React, Node.js, Tailwind, Radix UI, TanStack

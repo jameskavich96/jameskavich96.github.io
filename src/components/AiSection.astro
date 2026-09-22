@@ -1,0 +1,129 @@
+---
+// prose + pipeline diagram: AI shipped into products, not just AI-assisted coding
+---
+
+<section class="section" aria-labelledby="ai-heading">
+  <div class="wrap section-grid">
+    <p class="kicker"><span class="no">03</span>$ cat ai.md</p>
+    <div class="ai-grid">
+      <div class="prose reveal">
+        <h2 id="ai-heading" class="sr-only">AI engineering</h2>
+        <p class="lede">
+          I don't just use AI to write code. <span class="accent-text"
+            >I ship AI inside the product — and make it behave.</span
+          >
+        </p>
+        <p>
+          The AI features I've built run in production for real users: chat support on OpenAI
+          that handles profile completion, job-matching questions, and referral guidance — and a
+          matching pipeline where jobs and candidates become embeddings, Qdrant does the vector
+          search, and scored matches flow back into the platform.
+        </p>
+        <p>
+          Production AI is boundary engineering. A model is an unreliable dependency like any
+          other, so the real work lives at the edges: structured outputs validated before they
+          touch data, fallbacks for when the model is wrong or slow, and observability so a bad
+          answer is a bug report instead of a mystery.
+        </p>
+        <p class="soft">
+          Currently going deeper down the stack — RAG pipelines, embedding strategy, and
+          self-hosted models.
+        </p>
+      </div>
+
+      <figure class="diagram-panel reveal">
+        <figcaption class="sr-only">
+          The matching pipeline: jobs and candidates are embedded via OpenAI, searched in Qdrant,
+          and scored matches ship to production.
+        </figcaption>
+        <pre class="diagram" aria-hidden="true">
+  job post         candidate
+      │                │
+      └───►<span class="d-key"> openai </span>◄───┘
+          embeddings
+               │
+               ▼
+ ┌─<span class="d-key"> qdrant · vector search </span>─┐
+ │   similarity, not         │
+ │   keyword matching        │
+ └─────────────┬─────────────┘
+               ▼
+<span class="d-key">  chat support (openai)</span>
+   ├─ profile completion
+   ├─ job-match questions
+   └─ referral guidance
+               │
+               ▼
+  ship ──► production <span class="d-live">● live</span>
+<span class="d-note">  # real users, every day</span></pre>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .ai-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem);
+    line-height: 1.7;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .accent-text {
+    color: var(--accent);
+  }
+
+  .prose p {
+    max-width: var(--measure);
+  }
+
+  .prose p + p {
+    margin-top: 1.25rem;
+  }
+
+  .soft {
+    color: var(--text-soft);
+  }
+
+  .diagram-panel {
+    margin: 0;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .diagram {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .d-key {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .d-live {
+    color: oklch(75% 0.18 145);
+  }
+
+  .d-note {
+    font-style: italic;
+  }
+</style>
