@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>James Delos Reyes — Resume</title>
+<style>
+  @page { size: A4; margin: 13mm 15mm; }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.7pt;
+    line-height: 1.45;
+    color: #1a1a1a;
+  }
+  header { margin-bottom: 4mm; }
+  h1 { font-size: 19pt; letter-spacing: 0.02em; }
+  .role-line { font-size: 10.5pt; color: #333; margin-top: 1mm; }
+  .contact { font-size: 8.8pt; color: #444; margin-top: 1.5mm; }
+  .contact span + span::before { content: " · "; }
+  h2 {
+    font-size: 9.5pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 0.7pt solid #999;
+    padding-bottom: 1mm;
+    margin: 4.5mm 0 2.5mm;
+  }
+  .job { margin-bottom: 3.2mm; break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-title { font-size: 10.3pt; font-weight: 700; }
+  .job-title .co { font-weight: 400; }
+  .period { font-size: 8.8pt; color: #555; white-space: nowrap; }
+  .job-sub { font-size: 8.8pt; color: #555; font-style: italic; margin-top: 0.5mm; }
+  ul { padding-left: 4.5mm; margin-top: 1mm; }
+  li { margin-bottom: 0.8mm; }
+  .skills p { margin-bottom: 1mm; }
+  .skills b { display: inline-block; min-width: 34mm; }
+  .edu { display: flex; justify-content: space-between; align-items: baseline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>JAMES DELOS REYES</h1>
+  <p class="role-line">Full-Stack Engineer | TypeScript · React · NestJS · Node.js | AI Integration (OpenAI, RAG) | 8 yrs</p>
+  <p class="contact">
+    <span>Cebu, Philippines</span>
+    <span>sabakhadhaoy@gmail.com</span>
+    <span>+63 961 641 0822</span>
+    <span>linkedin.com/in/jamesakvich</span>
+    <span>github.com/jameskavich96</span>
+  </p>
+</header>
+
+<h2>Summary</h2>
+<p>
+  Full-stack engineer with 8 years across React/TypeScript frontends and Node.js backends, currently
+  building an AI-powered recruitment platform. I ship AI inside products — OpenAI chat support and an
+  embeddings + Qdrant vector-search matching pipeline running in production — and own features
+  end-to-end, from first wireframe through API integration to production.
+</p>
+
+<h2>Experience</h2>
+
+<div class="job">
+  <div class="job-head">
+    <span class="job-title">Full Stack Developer <span class="co">— Jobvious</span></span>
+    <span class="period">Apr 2025 – Present</span>
+  </div>
+  <p class="job-sub">AI-powered recruitment and referral platform — TypeScript workspace of 11 services: React SPAs (Vite), NestJS APIs, MySQL/Prisma, Redis, Socket.io, OpenAI matching with Qdrant vector search.</p>
+  <ul>
+    <li>Designed and built the full redesign of the admin platform: a 9-module React + TypeScript SPA (Tailwind, Radix UI, TanStack Query, Zustand) on a custom design system with hand-coded SVG data visualizations.</li>
+    <li>Built AI chat support on OpenAI for profile completion, job-matching queries, and referral guidance — cutting manual support work for the operations team.</li>
+    <li>Shipped participant-facing onboarding, resume upload, and referral workflows as mobile-first UI, plus real-time messaging and notifications over Socket.io.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <span class="job-title">Senior Software Engineer <span class="co">— Accenture</span></span>
+    <span class="period">Aug 2022 – Apr 2025</span>
+  </div>
+  <ul>
+    <li>Worked on Appwards, Philip Morris International's nationwide retailer loyalty platform (ph.pmiandu.com): retailers redeem pack promo codes for points — mobile-responsive React against Node.js services.</li>
+    <li>Built an internal payroll file-storage platform used by Accenture payroll teams globally (Mexico, PH, UK, Ireland).</li>
+    <li>Cut deployment time ~30% via CI/CD pipelines (Jenkins, Docker, AWS); improved load times ~25% through profiling and bottleneck resolution.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <span class="job-title">Back End Developer <span class="co">— GoTeam</span></span>
+    <span class="period">Jun 2021 – Aug 2022</span>
+  </div>
+  <ul>
+    <li>Built the pothole-vision backend for trucking client Blackmoth: rides capture route-tied pothole snapshots, surfaced to drivers on the next run over the same route via the truck's onboard system.</li>
+    <li>Resolved performance issues across Node.js/Express services, improving API response times ~20%; wrote unit and integration tests as standard delivery.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <span class="job-title">Software Engineer <span class="co">— Tech Mahindra</span></span>
+    <span class="period">Mar 2020 – Jun 2021</span>
+  </div>
+  <ul>
+    <li>Built a C#/.NET application that semi-automates CSR agents' repetitive daily tasks into a single click — improving task efficiency ~40%.</li>
+    <li>Automated email extraction (saving 10+ hours weekly) and built a React app that replaced the recruitment team's manual workflows.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-head">
+    <span class="job-title">Software Engineer <span class="co">— M Lhuillier Financial Services</span></span>
+    <span class="period">Jun 2018 – Mar 2020</span>
+  </div>
+  <ul>
+    <li>Migrated the nationwide pawn-system teller tools from a C# desktop app to a React web application, and rewrote its C# APIs in Node.js for performance and scalability.</li>
+    <li>The web migration retired the branch-local server + sync-tool layer — one central system replaced per-branch replication across branches all over the Philippines.</li>
+  </ul>
+</div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <p><b>Core:</b> TypeScript, JavaScript, React, Node.js, HTML/CSS, Tailwind CSS, Radix UI, TanStack Query, Zustand, REST APIs, MySQL, PostgreSQL, Git</p>
+  <p><b>Working knowledge:</b> NestJS, Prisma, Socket.io, OpenAI API, C#/.NET, Docker, GitHub Actions, Vitest, Testing Library, MongoDB, Capacitor, AWS S3</p>
+  <p><b>Familiar:</b> Redis, BullMQ, Qdrant (vector search), RAG pipelines, Playwright, Strapi</p>
+</div>
+
+<h2>Education</h2>
+<p class="edu"><span><b>BSc Information Technology</b> — Cebu Eastern College</span><span class="period">2014 – 2018</span></p>
+
+<h2>Languages</h2>
+<p>English (professional working proficiency) · Filipino/Cebuano (native)</p>
+</body>
+</html>
