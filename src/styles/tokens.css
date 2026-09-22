@@ -1,0 +1,25 @@
+:root {
+  /* warm editorial paper + ink + vermilion accent */
+  --paper: oklch(97.5% 0.01 85);
+  --paper-deep: oklch(94% 0.016 85);
+  --ink: oklch(21% 0.02 60);
+  --ink-soft: oklch(46% 0.018 60);
+  --accent: oklch(54% 0.19 32);
+  --rule: oklch(85% 0.014 85);
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-small: 0.8125rem;
+  --text-hero: clamp(3rem, 1.25rem + 9.5vw, 8.75rem);
+  --text-h2: clamp(1.9rem, 1.3rem + 2.6vw, 3.4rem);
+  --text-role: clamp(1.4rem, 1.1rem + 1.4vw, 2.2rem);
+
+  --space-section: clamp(5rem, 3rem + 8vw, 11rem);
+  --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
+  --measure: 62ch;
+
+  --duration: 700ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

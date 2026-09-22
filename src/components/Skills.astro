@@ -1,0 +1,54 @@
+---
+import { skills } from "../data/profile";
+---
+
+<section class="section" aria-labelledby="skills-heading">
+  <div class="wrap section-grid">
+    <p class="kicker"><span class="no">03</span>Toolkit</p>
+    <div class="groups reveal">
+      <h2 id="skills-heading" class="sr-only">Skills</h2>
+      {
+        skills.map((group) => (
+          <dl class="group">
+            <dt>{group.label}</dt>
+            {group.items.map((item) => (
+              <dd>{item}</dd>
+            ))}
+          </dl>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 2.5rem;
+  }
+
+  .group dt {
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.85rem;
+  }
+
+  .group dd {
+    margin: 0;
+    padding-block: 0.45rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

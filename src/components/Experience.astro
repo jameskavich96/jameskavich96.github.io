@@ -1,0 +1,105 @@
+---
+import { experience } from "../data/profile";
+---
+
+<section id="experience" class="section" aria-labelledby="experience-heading">
+  <div class="wrap section-grid">
+    <p class="kicker"><span class="no">02</span>Experience</p>
+    <div>
+      <h2 id="experience-heading" class="sr-only">Experience</h2>
+      <ol class="roles">
+        {
+          experience.map((role) => (
+            <li class="role reveal">
+              <div class="role-head">
+                <h3 class="role-title">
+                  {role.title} <span class="role-at">at {role.company}</span>
+                </h3>
+                <p class="role-period">{role.period}</p>
+              </div>
+              <p class="role-summary">{role.summary}</p>
+              <ul class="role-bullets">
+                {role.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .roles {
+    list-style: none;
+    padding: 0;
+  }
+
+  .role {
+    padding-block: 2.25rem;
+  }
+
+  .role + .role {
+    border-top: 1px solid var(--rule);
+  }
+
+  .role-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 2rem;
+  }
+
+  .role-title {
+    font-family: var(--font-display);
+    font-size: var(--text-role);
+    font-weight: 560;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .role-at {
+    font-style: italic;
+    font-weight: 460;
+    color: var(--accent);
+  }
+
+  .role-period {
+    font-size: var(--text-small);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .role-summary {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+  }
+
+  .role-bullets {
+    margin-top: 1rem;
+    padding-left: 1.1rem;
+    max-width: var(--measure);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .role-bullets li::marker {
+    color: var(--accent);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>
