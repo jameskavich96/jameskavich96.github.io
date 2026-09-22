@@ -28,10 +28,10 @@ Qdrant vector search.
   used by Accenture teams globally (Mexico, PH, UK, Ireland...).
   Case study: /case-studies/accenture/
 - Back End Developer, GoTeam (2021–2022) — for client Black Moth (intelligent
-  machine vision systems for mining and road infrastructure): onboard truck
-  units capture route-tied pothole snapshots to AWS S3, served via backend
-  APIs into the fleet web app and to drivers on the next run over the same
-  route. Case study: /case-studies/goteam/
+  machine vision systems for mining and road infrastructure): vehicle-mounted
+  units detect road defects (potholes, cracks), captures stored route-tied in
+  AWS S3 and served via backend APIs into the web app, where operators track
+  defect growth across passes. Case study: /case-studies/goteam/
 - Software Engineer, Tech Mahindra (2020–2021) — one-click semi-automation of
   CSR agents' manual daily tasks (C#/.NET), ~40% efficiency gain.
   Case study: /case-studies/tech-mahindra/

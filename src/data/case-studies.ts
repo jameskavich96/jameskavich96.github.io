@@ -143,11 +143,11 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "goteam",
     order: "03",
-    title: { lead: "Pothole Vision", accent: "for Trucking" },
-    tagline: "// trucks that remember every pothole and warn the next run",
-    metaTitle: "Case Study: Pothole Vision for Blackmoth — James Delos Reyes",
+    title: { lead: "Roads That", accent: "Remember" },
+    tagline: "// machine vision that logs every road defect, so the next pass sees it coming",
+    metaTitle: "Case Study: Road Vision Backend for Black Moth — James Delos Reyes",
     metaDescription:
-      "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: route-aware pothole snapshots captured per ride and surfaced to drivers on their next run over the same route.",
+      "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: vehicle-mounted cameras detect road defects, captures land in AWS S3, and the platform tracks defect growth across visits.",
     facts: [
       { label: "role", value: "back end developer" },
       { label: "period", value: "2021 — 2022" },
@@ -160,14 +160,14 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
-          "Black Moth is a leader in rugged, intelligent <strong>machine vision systems</strong> for mining and road infrastructure. Their clients run heavy trucks on recurring routes, where potholes are more than a nuisance — they damage vehicles and cargo, and every driver hit them blind, every time, even on roads the fleet had driven the day before. The fleets had the knowledge; nothing captured it.",
+          "Black Moth is a leader in rugged, intelligent <strong>machine vision systems</strong> for mining and road infrastructure. Their clients — councils managing road networks, operators running heavy vehicles — fight the same enemy: road defects. Potholes, cracks, and uneven surfaces damage vehicles, escalate if untreated, and were only as visible as the last manual inspection. The vehicles drove over the evidence every day; nothing captured it.",
         ],
       },
       {
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "Black Moth's vision unit rides on the truck itself, watching the road. I built the backend that gives the platform a <strong>memory of the road</strong>: every pothole the onboard system spots is captured, tied to its route, and stored in <strong>AWS S3</strong>, then served through the APIs into the fleet's web application (AngularJS — my work sat behind it, on the backend). On the next run over the same route, the driver gets a vision of what's ahead — hazards spotted by the trucks that came before.",
+          "Black Moth's camera units ride on the vehicles themselves, using machine vision to spot road defects as the fleet drives. I built the backend that gives the platform a <strong>memory of the road</strong>: every detection is captured, tied to its route, stored in <strong>AWS S3</strong>, and served through the APIs into the web application (AngularJS — my work sat behind it, on the backend) where operators review defects and compare passes over the same route. The next vehicle through gets a vision of what's ahead — hazards spotted by the ones that came before.",
           "Alongside the feature work: performance fixes across the backend (~20% faster API responses) and unit/integration test coverage as standard delivery.",
         ],
       },
@@ -176,8 +176,9 @@ export const caseStudies: CaseStudy[] = [
         heading: "The outcome",
         paras: [],
         bullets: [
-          "Road hazards became fleet knowledge instead of per-driver surprises — every truck benefits from every previous run.",
-          // TODO(james): any number Blackmoth saw — incident reports, maintenance savings, routes covered
+          "Road hazards became fleet knowledge instead of per-driver surprises — every vehicle benefits from every previous pass.",
+          "Defects stopped being snapshots and became a timeline: repeated passes over the same route let operators track wear and defect growth, and prioritize repairs before escalation.",
+          // TODO(james): any number Black Moth saw — incident reports, maintenance savings, routes covered
         ],
       },
     ],
