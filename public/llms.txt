@@ -24,8 +24,8 @@ Qdrant vector search.
 
 - Senior Software Engineer, Accenture (2022–2025) — Appwards, the retailer
   loyalty platform for Philip Morris International (ph.pmiandu.com: retailers
-  redeem pack promo codes for points), and an internal payroll file-storage
-  system used by Accenture payroll teams globally (Mexico, PH, UK, Ireland...).
+  redeem pack promo codes for points), and an internal file-storage system
+  used by Accenture teams globally (Mexico, PH, UK, Ireland...).
   Case study: /case-studies/accenture/
 - Back End Developer, GoTeam (2021–2022) — for trucking client Blackmoth:
   route-aware pothole snapshots captured per ride and shown to drivers on the
