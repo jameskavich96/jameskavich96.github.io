@@ -98,8 +98,9 @@ img {
   }
 }
 
-/* scroll reveal — transform/opacity only */
-.reveal {
+/* scroll reveal — transform/opacity only; hidden state gated on html.js
+   so content stays visible without JS (and in static snapshots) */
+html.js .reveal {
   opacity: 0;
   transform: translateY(1.25rem);
   transition:
@@ -107,7 +108,7 @@ img {
     transform var(--duration) var(--ease-out-expo);
 }
 
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }

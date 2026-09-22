@@ -18,11 +18,13 @@ import { experience } from "../data/profile";
                 <p class="role-period">{role.period}</p>
               </div>
               <p class="role-summary">{role.summary}</p>
-              <ul class="role-bullets">
-                {role.bullets.map((b) => (
-                  <li>{b}</li>
-                ))}
-              </ul>
+              {role.bullets.length > 0 && (
+                <ul class="role-bullets">
+                  {role.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))
         }

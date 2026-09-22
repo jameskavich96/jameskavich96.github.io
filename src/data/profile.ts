@@ -1,25 +1,23 @@
 // Single source of truth for page content. Edit here, never in components.
-// TODO(james): everything marked PLACEHOLDER needs your real facts.
 
 export const profile = {
   name: "James",
-  // PLACEHOLDER — surname for the masthead + <title>
-  fullName: "James Placeholder",
+  fullName: "James Delos Reyes",
   role: "Full-Stack Engineer",
-  location: "PLACEHOLDER, Earth",
-  email: "james@itsjobvious.com",
+  location: "Cebu, Philippines",
+  email: "sabakhadhaoy@gmail.com",
   links: {
+    // TODO(james): add your GitHub username
     github: "https://github.com/PLACEHOLDER",
-    linkedin: "https://www.linkedin.com/in/PLACEHOLDER",
+    linkedin: "https://www.linkedin.com/in/jamesakvich",
   },
   headline: {
     lead: "Building the plumbing",
     accent: "behind job matching.",
   },
   about: [
-    "I'm a full-stack engineer working across React, NestJS, and the messy real world in between — queues, webhooks, vector search, and the auth flows nobody thanks you for until they break.",
-    // PLACEHOLDER — 2–3 more sentences: how you got here, what you care about, where you're headed (AI application engineering).
-    "PLACEHOLDER: a sentence about your path into engineering and what you're deliberately learning next.",
+    "I'm a full-stack engineer with eight years across React/TypeScript frontends and Node.js backends — currently building an AI-powered recruitment platform: a TypeScript workspace of eleven services spanning React SPAs, NestJS APIs, OpenAI-powered matching, and Qdrant vector search.",
+    "I've designed and shipped a nine-module admin platform end-to-end on a custom design system, built AI chat support on OpenAI, and I'm comfortable owning a feature from the first wireframe through API integration to production. Right now I'm going deeper into AI application engineering — RAG pipelines, embeddings, and the systems that make them reliable.",
   ],
 };
 
@@ -34,39 +32,77 @@ export interface Role {
 export const experience: Role[] = [
   {
     company: "Jobvious",
-    title: "Full-Stack Engineer",
-    period: "PLACEHOLDER — Present",
+    title: "Full Stack Developer",
+    period: "Apr 2025 — Present",
     summary:
-      "Job-matching platform: React SPA, NestJS services, AI-powered candidate matching.",
+      "AI-powered recruitment and referral platform — React SPAs, NestJS APIs, MySQL/Prisma, Redis, Socket.io, and OpenAI matching with Qdrant vector search.",
     bullets: [
-      "Ship features end-to-end across a multi-service platform — regional APIs, webhook ingress, real-time chat, and an AI matching service backed by vector search.",
-      "PLACEHOLDER: one concrete outcome you're proud of (metric, launch, or system you owned).",
-      "PLACEHOLDER: a second outcome — think 'what changed because I was here'.",
+      "Designed and built the full redesign of the admin platform: a 9-module React + TypeScript SPA on a custom design system with hand-coded SVG data visualizations.",
+      "Built AI chat support on OpenAI for profile completion, job-matching queries, and referral guidance — cutting manual support work for the operations team.",
+      "Shipped participant-facing onboarding, resume upload, and referral workflows as mobile-first UI, plus real-time messaging and notifications over Socket.io.",
     ],
   },
   {
-    company: "PLACEHOLDER Co",
-    title: "PLACEHOLDER Title",
-    period: "20XX — 20XX",
-    summary: "PLACEHOLDER: one line on what the company does.",
+    company: "Accenture",
+    title: "Senior Software Engineer",
+    period: "Aug 2022 — Apr 2025",
+    summary: "Enterprise web applications for global clients.",
     bullets: [
-      "PLACEHOLDER: outcome-oriented bullet.",
-      "PLACEHOLDER: outcome-oriented bullet.",
+      "Built mobile-responsive React/Node.js applications and designed MySQL/PostgreSQL schemas for scalable systems.",
+      "Cut deployment time ~30% via CI/CD pipelines (Jenkins, Docker, AWS) and improved load times ~25% through profiling and bottleneck resolution.",
     ],
+  },
+  {
+    company: "GoTeam",
+    title: "Back End Developer",
+    period: "Jun 2021 — Aug 2022",
+    summary:
+      "Node.js/Express backend services — features, performance fixes (~20% faster API responses), and test coverage.",
+    bullets: [],
+  },
+  {
+    company: "Tech Mahindra",
+    title: "Software Engineer",
+    period: "Mar 2020 — Jun 2021",
+    summary:
+      "C#/.NET automation and a React app that replaced the recruitment team's manual workflows, saving 10+ hours weekly.",
+    bullets: [],
+  },
+  {
+    company: "M Lhuillier Financial Services",
+    title: "Software Engineer",
+    period: "Jun 2018 — Mar 2020",
+    summary:
+      "Migrated a C# desktop app to React and rewrote its APIs in Node.js for better performance and accessibility.",
+    bullets: [],
   },
 ];
 
 export const skills: { label: string; items: string[] }[] = [
   {
-    label: "Frontend",
-    items: ["React", "TypeScript", "Vite", "TanStack Query", "Tailwind", "Playwright"],
+    label: "Core",
+    items: [
+      "TypeScript / JavaScript",
+      "React",
+      "Node.js",
+      "Tailwind / Radix UI",
+      "TanStack Query / Zustand",
+      "MySQL / PostgreSQL",
+    ],
   },
   {
-    label: "Backend",
-    items: ["NestJS", "Node.js", "Prisma", "MySQL / PostgreSQL", "Redis / BullMQ", "Socket.io"],
+    label: "Working knowledge",
+    items: [
+      "NestJS / Prisma",
+      "OpenAI API",
+      "Socket.io",
+      "Docker / GitHub Actions",
+      "Vitest / Testing Library",
+      "MongoDB / AWS S3",
+    ],
   },
   {
-    label: "AI & Infra",
-    items: ["OpenAI APIs", "Qdrant / vector search", "RAG pipelines", "Docker", "CI/CD"],
+    label: "Familiar",
+    items: ["Redis / BullMQ", "Qdrant (vector search)", "RAG pipelines", "Playwright", "Strapi"],
   },
 ];
