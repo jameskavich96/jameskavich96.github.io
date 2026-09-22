@@ -6,13 +6,11 @@ const lastName = rest.join(" ");
 
 <header class="hero wrap">
   <nav class="masthead" aria-label="Main navigation">
-    <span class="masthead-name"
-      >{profile.name.toLowerCase()}<span class="dim">.dev</span></span
-    >
+    <span class="masthead-name">dr<span class="dim">.{profile.name.toLowerCase()}</span></span>
     <div class="masthead-links">
       <a href="#experience">work</a>
       <a href="#contact">contact</a>
-      <span class="status"><span class="pulse" aria-hidden="true"></span> open to work</span>
+      <span class="status"><span class="pulse" aria-hidden="true"></span> the dr. is in</span>
     </div>
   </nav>
 
@@ -23,6 +21,7 @@ const lastName = rest.join(" ");
 
   <p class="tagline reveal">
     <span class="comment">// {profile.headline.lead.toLowerCase()} {profile.headline.accent}</span>
+    <span class="dr-line">// {profile.drLine}</span>
   </p>
 
   <dl class="stats reveal">
@@ -127,6 +126,14 @@ const lastName = rest.join(" ");
   .comment {
     color: var(--accent-deep);
     font-style: italic;
+  }
+
+  .dr-line {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.06em;
+    color: var(--text-soft);
   }
 
   .stats {
