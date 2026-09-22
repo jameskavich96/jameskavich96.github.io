@@ -20,8 +20,8 @@ export const profile = {
   },
   stats: [
     { label: "Years shipping", value: "8+" },
-    { label: "Services in current platform", value: "11" },
-    { label: "Admin modules built end-to-end", value: "9" },
+    { label: "Production systems built", value: "10+" },
+    { label: "Industries served", value: "5" },
   ],
   about: [
     "I'm a full-stack engineer with eight years across React/TypeScript frontends and Node.js backends — currently building an AI-powered recruitment platform: a TypeScript workspace of eleven services spanning React SPAs, NestJS APIs, OpenAI-powered matching, and Qdrant vector search.",
