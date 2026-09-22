@@ -70,6 +70,7 @@ export const experience: Role[] = [
       "Cut deployment time ~30% via CI/CD pipelines (Jenkins, Docker, AWS) and improved load times ~25% through profiling and bottleneck resolution.",
     ],
     refs: [
+      { label: "case study", href: "/case-studies/accenture/" },
       { label: "philip morris intl (client)", href: "https://www.pmi.com" },
       { label: "ph.pmiandu.com", href: "https://ph.pmiandu.com" },
     ],
@@ -82,7 +83,10 @@ export const experience: Role[] = [
     summary:
       "Node.js/Express backend services — features, performance fixes (~20% faster API responses), and test coverage.",
     bullets: [],
-    refs: [{ label: "blackmoth.com (client)", href: "https://www.blackmoth.com" }],
+    refs: [
+      { label: "case study", href: "/case-studies/goteam/" },
+      { label: "blackmoth.com (client)", href: "https://www.blackmoth.com" },
+    ],
   },
   {
     company: "Tech Mahindra",
@@ -92,7 +96,10 @@ export const experience: Role[] = [
     summary:
       "C#/.NET automation and a React app that replaced the recruitment team's manual workflows, saving 10+ hours weekly.",
     bullets: [],
-    refs: [{ label: "techmahindra.com", href: "https://www.techmahindra.com" }],
+    refs: [
+      { label: "case study", href: "/case-studies/tech-mahindra/" },
+      { label: "techmahindra.com", href: "https://www.techmahindra.com" },
+    ],
   },
   {
     company: "M Lhuillier Financial Services",
@@ -102,7 +109,10 @@ export const experience: Role[] = [
     summary:
       "Migrated a C# desktop app to React and rewrote its APIs in Node.js for better performance and accessibility.",
     bullets: [],
-    refs: [{ label: "mlhuillier.com", href: "https://mlhuillier.com" }],
+    refs: [
+      { label: "case study", href: "/case-studies/mlhuillier/" },
+      { label: "mlhuillier.com", href: "https://mlhuillier.com" },
+    ],
   },
 ];
 

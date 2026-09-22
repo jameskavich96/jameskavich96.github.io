@@ -1,0 +1,262 @@
+---
+import Base from "../../layouts/Base.astro";
+import { profile } from "../../data/profile";
+import { caseStudies } from "../../data/case-studies";
+
+export function getStaticPaths() {
+  return caseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+const { study } = Astro.props;
+---
+
+<Base
+  title={study.metaTitle}
+  description={study.metaDescription}
+  path={`/case-studies/${study.slug}/`}
+>
+  <div class="wrap">
+    <nav class="masthead" aria-label="Main navigation">
+      <a class="back" href="/">← cd ~</a>
+      <span class="dim">case study {study.order}</span>
+    </nav>
+  </div>
+
+  <main class="wrap study">
+    <header class="study-head">
+      <h1>{study.title.lead} <span class="accent">{study.title.accent}</span></h1>
+      <p class="tagline"><span class="comment">{study.tagline}</span></p>
+      <dl class="facts">
+        {
+          study.facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>
+                {fact.href ? (
+                  <a href={fact.href} target="_blank" rel="noopener noreferrer">
+                    {fact.value}
+                  </a>
+                ) : (
+                  fact.value
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <ul class="chips" aria-label="Stack">
+        {study.stack.map((s) => <li>{s}</li>)}
+      </ul>
+    </header>
+
+    {
+      study.sections.map((section, i) => (
+        <section class="section" aria-labelledby={`section-h-${i}`}>
+          <div class="section-grid">
+            <p class="kicker">
+              <span class="no">{String(i + 1).padStart(2, "0")}</span>
+              {section.cmd}
+            </p>
+            <div>
+              <h2 id={`section-h-${i}`} class="sr-only">
+                {section.heading}
+              </h2>
+              {section.paras.map((para) => (
+                <p set:html={para} />
+              ))}
+              {section.grid && (
+                <ul class="mod-list">
+                  {section.grid.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+              {section.bullets && section.bullets.length > 0 && (
+                <ul class="outcomes">
+                  {section.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </section>
+      ))
+    }
+
+    <footer class="study-foot">
+      <a class="cta" href={`mailto:${profile.email}`}
+        ><span class="accent">$</span> ask me about it</a
+      >
+      <a class="back" href="/">← back to portfolio</a>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: var(--text-small);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--line);
+    padding-block: 1.5rem 1rem;
+  }
+
+  .back {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .back:hover {
+    text-decoration: underline;
+  }
+
+  .dim {
+    color: var(--text-soft);
+  }
+
+  .study-head {
+    padding-block: clamp(3rem, 8vw, 6rem) 1rem;
+  }
+
+  .study-head h1 {
+    font-size: clamp(2rem, 1rem + 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .tagline {
+    margin-top: 1rem;
+  }
+
+  .comment {
+    color: var(--accent-deep);
+    font-style: italic;
+  }
+
+  .facts {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.4rem;
+    max-width: var(--measure);
+  }
+
+  .facts div {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .facts dt {
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    min-width: 6rem;
+    line-height: inherit;
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  .facts a {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .facts a:hover {
+    text-decoration: underline;
+  }
+
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .chips li {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 0.3rem 0.8rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+  }
+
+  .study p {
+    max-width: var(--measure);
+  }
+
+  .study p + p,
+  .study ul + p,
+  .study p + ul {
+    margin-top: 1.25rem;
+  }
+
+  .mod-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.5rem;
+    max-width: var(--measure);
+  }
+
+  .mod-list li,
+  .outcomes li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .mod-list li::before,
+  .outcomes li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .outcomes {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    max-width: var(--measure);
+  }
+
+  .study-foot {
+    border-top: 1px solid var(--line);
+    margin-top: calc(var(--space-section) / 2);
+    padding-block: 2.5rem 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    align-items: baseline;
+  }
+
+  .cta {
+    font-size: clamp(1.2rem, 1rem + 1.5vw, 2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .cta:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+</style>

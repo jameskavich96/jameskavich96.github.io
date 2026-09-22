@@ -22,13 +22,19 @@ Qdrant vector search.
 
 ## Previous roles
 
-- Senior Software Engineer, Accenture (2022–2025) — enterprise React/Node.js
-  apps; client work incl. Philip Morris International (ph.pmiandu.com).
-- Back End Developer, GoTeam (2021–2022) — Node.js/Express services; client
-  work incl. Blackmoth.
-- Software Engineer, Tech Mahindra (2020–2021) — C#/.NET automation, React.
-- Software Engineer, M Lhuillier Financial Services (2018–2020) — C#-to-React
-  migration, Node.js APIs.
+- Senior Software Engineer, Accenture (2022–2025) — retailer loyalty platform
+  for Philip Morris International (ph.pmiandu.com: retailers redeem pack promo
+  codes for points) and an internal payroll file-storage system.
+  Case study: /case-studies/accenture/
+- Back End Developer, GoTeam (2021–2022) — for trucking client Blackmoth:
+  route-aware pothole snapshots captured per ride and shown to drivers on the
+  next run over the same route. Case study: /case-studies/goteam/
+- Software Engineer, Tech Mahindra (2020–2021) — one-click semi-automation of
+  CSR agents' manual daily tasks (C#/.NET), ~40% efficiency gain.
+  Case study: /case-studies/tech-mahindra/
+- Software Engineer, M Lhuillier Financial Services (2018–2020) — migrated the
+  nationwide pawn-system teller tools from C# desktop to React web, retiring
+  the branch-local server + sync-tool layer. Case study: /case-studies/mlhuillier/
 
 ## Skills
 
