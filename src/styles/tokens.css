@@ -4,8 +4,8 @@
   --panel: oklch(17.5% 0.014 230);
   --text: oklch(88% 0.008 210);
   --text-soft: oklch(62% 0.014 215);
-  --accent: oklch(69% 0.1 190);
-  --accent-deep: oklch(58% 0.085 192);
+  --accent: oklch(74% 0.15 160);
+  --accent-deep: oklch(62% 0.12 162);
   --line: oklch(100% 0 0 / 0.09);
   --grid: oklch(100% 0 0 / 0.035);
 
