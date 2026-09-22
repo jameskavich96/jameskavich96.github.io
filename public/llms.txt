@@ -14,7 +14,7 @@ Qdrant vector search.
 
 - Designed and built the full redesign of the admin platform: a 9-module
   React + TypeScript SPA on a custom design system with hand-coded SVG data
-  visualizations. Case study: /case-studies/jobvious-admin/
+  visualizations. Case study: /case-studies/jobvious/
 - Built AI chat support (OpenAI) for profile completion, job-matching queries,
   and referral guidance.
 - Shipped participant-facing onboarding, resume upload, and referral workflows

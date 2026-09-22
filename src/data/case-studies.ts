@@ -23,15 +23,15 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "jobvious-admin",
+    slug: "jobvious",
     order: "01",
-    title: { lead: "Jobvious", accent: "Admin Platform" },
-    tagline: "// a 9-module admin SPA, designed and built end-to-end",
-    metaTitle: "Case Study: Jobvious Admin Platform — James Delos Reyes",
+    title: { lead: "Jobvious", accent: "Platform" },
+    tagline: "// an AI-powered recruitment platform — admin, participant modules, and AI features",
+    metaTitle: "Case Study: Jobvious Platform — James Delos Reyes",
     metaDescription:
-      "How I designed and built a 9-module React + TypeScript admin platform end-to-end on a custom design system for an AI-powered recruitment platform.",
+      "Full-stack work across an AI-powered recruitment platform: a 9-module admin SPA built end-to-end, participant-facing modules, AI chat support, and real-time features.",
     facts: [
-      { label: "role", value: "full stack developer — sole owner of the redesign" },
+      { label: "role", value: "full stack developer" },
       { label: "period", value: "2025 — present" },
       { label: "company", value: "Jobvious ↗", href: "https://itsjobvious.com" },
     ],
@@ -51,15 +51,15 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
-          "Jobvious is an AI-powered recruitment and referral platform. Its operations team ran the business — approving participants, moderating content, exporting timesheets, answering messages — through an aging admin interface that hadn't kept pace with the product. Every new platform feature made the gap worse: more manual steps, more context-switching, more time per task.",
-          "The brief: redesign the entire admin surface, not as a reskin but as a rebuild — while the operations team kept using it daily.",
+          "Jobvious is an AI-powered recruitment and referral platform — a TypeScript workspace of eleven services: React SPAs, NestJS APIs, MySQL/Prisma, Redis, Socket.io, and OpenAI-powered matching with Qdrant vector search. I work across the whole surface: the participant experience, the operations team's admin tools, and the AI features in between.",
+          "The biggest single piece: the operations team ran the business — approving participants, moderating content, exporting timesheets, answering messages — through an aging admin interface that hadn't kept pace with the product. The brief was a rebuild, not a reskin, while the team kept using it daily.",
         ],
       },
       {
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "I designed and built the new platform as a React + TypeScript SPA on a <strong>custom design system</strong> — tokens, primitives, and composed components on Radix UI, so all nine modules share one visual and interaction language:",
+          "I designed and built the new admin platform as a React + TypeScript SPA on a <strong>custom design system</strong> — tokens, primitives, and composed components on Radix UI, so all nine modules share one visual and interaction language:",
         ],
         grid: [
           "approvals",
@@ -75,14 +75,21 @@ export const caseStudies: CaseStudy[] = [
         bullets: [],
       },
       {
+        cmd: "$ cat platform.md",
+        heading: "Across the platform",
+        paras: [
+          "Beyond the admin: I shipped <strong>participant-facing modules</strong> — onboarding, resume upload, profile management, and referral workflows — as mobile-first UI on a reusable component architecture, and built <strong>AI chat support on OpenAI</strong> for profile completion, job-matching questions, and referral guidance.",
+          "Server state runs through TanStack Query (caching, optimistic updates, background revalidation against the NestJS APIs); client state through Zustand. Live chat and notifications ride Socket.io channels, so both participants and admins see events as they happen. Data visualizations are <strong>hand-coded SVG</strong> — no chart library.",
+        ],
+      },
+      {
         cmd: "$ cat outcome.md",
         heading: "The outcome",
-        paras: [
-          "Server state runs through TanStack Query (caching, optimistic updates, background revalidation against the NestJS API); client state through Zustand. Live chat and push-notification flows ride the platform's Socket.io channels, so admins see events as they happen. Data visualizations are <strong>hand-coded SVG</strong> — no chart library.",
-        ],
+        paras: [],
         bullets: [
-          "Nine modules shipped on one coherent design system — new admin features now compose from existing primitives instead of starting from zero.",
-          "The operations team runs approvals, moderation, messaging, and timesheet export in one place, with real-time updates replacing manual refresh-and-check loops.",
+          "Nine admin modules shipped on one coherent design system — new features now compose from existing primitives instead of starting from zero.",
+          "The operations team runs approvals, moderation, messaging, and timesheet export in one place, with real-time updates replacing manual refresh-and-check loops — and AI chat support absorbing routine questions.",
+          "Participants onboard, upload resumes, and refer people from their phones — the platform's growth loop is self-serve.",
           "PLACEHOLDER: a concrete metric or a line of feedback from the operations team.",
         ],
       },

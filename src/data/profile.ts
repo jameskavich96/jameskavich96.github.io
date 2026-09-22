@@ -55,7 +55,7 @@ export const experience: Role[] = [
       "Shipped participant-facing onboarding, resume upload, and referral workflows as mobile-first UI, plus real-time messaging and notifications over Socket.io.",
     ],
     refs: [
-      { label: "case study", href: "/case-studies/jobvious-admin/" },
+      { label: "case study", href: "/case-studies/jobvious/" },
       { label: "itsjobvious.com", href: "https://itsjobvious.com" },
     ],
   },
