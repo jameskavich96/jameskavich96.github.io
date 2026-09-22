@@ -79,9 +79,12 @@ export const experience: Role[] = [
     companyUrl: "https://go.team",
     title: "Back End Developer",
     period: "Jun 2021 — Aug 2022",
-    summary:
-      "Node.js/Express backend services — features, performance fixes (~20% faster API responses), and test coverage.",
-    bullets: [],
+    summary: "Node.js/Express backend services for client work, incl. Blackmoth trucking.",
+    bullets: [
+      "Built the pothole-vision backend for Blackmoth's truck fleet: every ride captures route-tied pothole snapshots, and the next run over the same route sees the hazards coming via the truck's onboard system.",
+      "Debugged and resolved performance issues across the backend, improving API response times ~20%.",
+      "Wrote unit and integration tests as standard delivery, collaborating with frontend developers on API design.",
+    ],
     refs: [
       { label: "case study", href: "/case-studies/goteam/" },
       { label: "blackmoth.com (client)", href: "https://www.blackmoth.com" },
@@ -92,9 +95,12 @@ export const experience: Role[] = [
     companyUrl: "https://www.techmahindra.com",
     title: "Software Engineer",
     period: "Mar 2020 — Jun 2021",
-    summary:
-      "C#/.NET automation and a React app that replaced the recruitment team's manual workflows, saving 10+ hours weekly.",
-    bullets: [],
+    summary: "Automation that turned CSR agents' manual day-to-day routine into one click.",
+    bullets: [
+      "Built a C#/.NET application that semi-automates customer service agents' repetitive daily tasks into a single click — improving task efficiency ~40%.",
+      "Automated email extraction that had been eating 10+ hours of manual work weekly.",
+      "Built a React web application for the recruitment team, replacing their manual workflows.",
+    ],
     refs: [
       { label: "case study", href: "/case-studies/tech-mahindra/" },
       { label: "techmahindra.com", href: "https://www.techmahindra.com" },
@@ -105,9 +111,12 @@ export const experience: Role[] = [
     companyUrl: "https://mlhuillier.com",
     title: "Software Engineer",
     period: "Jun 2018 — Mar 2020",
-    summary:
-      "Migrated a C# desktop app to React and rewrote its APIs in Node.js for better performance and accessibility.",
-    bullets: [],
+    summary: "The nationwide pawn system, moved from C# desktop to React web.",
+    bullets: [
+      "Migrated the pawn-system teller tools — used in branches all over the Philippines — from a C# desktop app to a React web application: one deployment instead of per-machine installs.",
+      "Rewrote the existing C# APIs in Node.js, improving performance and scalability.",
+      "The web migration retired the branch-local server + sync-tool layer I'd been maintaining — one central system replaced per-branch replication.",
+    ],
     refs: [
       { label: "case study", href: "/case-studies/mlhuillier/" },
       { label: "mlhuillier.com", href: "https://mlhuillier.com" },
