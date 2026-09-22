@@ -10,6 +10,20 @@ export function getStaticPaths() {
 }
 
 const { study } = Astro.props;
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: `${study.title.lead} ${study.title.accent}`,
+  description: study.metaDescription,
+  url: new URL(`/case-studies/${study.slug}/`, import.meta.env.SITE).href,
+  author: {
+    "@type": "Person",
+    name: profile.fullName,
+    url: import.meta.env.SITE,
+  },
+  about: study.stack,
+});
 ---
 
 <Base
@@ -17,6 +31,7 @@ const { study } = Astro.props;
   description={study.metaDescription}
   path={`/case-studies/${study.slug}/`}
 >
+  <script type="application/ld+json" set:html={articleJsonLd} is:inline />
   <TitleBar title={`case-studies/${study.slug}.md — portfolio`} />
   <nav class="tabstrip" aria-label="Main navigation">
     <a class="tab" href="/">← portfolio</a>
