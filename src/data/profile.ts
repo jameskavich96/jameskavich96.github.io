@@ -25,8 +25,9 @@ export const profile = {
     { label: "Production systems built", value: "10+" },
     { label: "Industries served", value: "5" },
   ],
+  // paragraphs may contain trusted inline HTML (<strong>)
   about: [
-    "I'm a full-stack engineer with eight years of building software that businesses actually run on — teller tools in branches across the Philippines, truck fleets in Australia that remember the road, file storage used by teams around the globe, and an AI-powered hiring platform in the US. React and TypeScript up front, Node.js and NestJS behind.",
+    "I'm a full-stack engineer with eight years of building software that businesses actually run on — teller tools in branches across the <strong>Philippines</strong>, truck fleets in <strong>Australia</strong> that remember the road, an AI-powered hiring platform in the <strong>US</strong>, and file storage used by teams <strong>around the globe</strong>. React and TypeScript up front, Node.js and NestJS behind.",
     "The pattern across all of it: I get handed a system in pain — a desktop app chained to branch machines, agents grinding through the same manual task all day, a platform its team has outgrown — and I own the cure end-to-end, from first wireframe through API integration to production. Lately that means going deeper into AI application engineering: OpenAI integrations, RAG pipelines, and vector search.",
   ],
 };
