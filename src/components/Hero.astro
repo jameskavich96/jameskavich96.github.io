@@ -48,10 +48,11 @@ const lastName = rest.join(" ");
   }
 
   .headline {
+    font-family: var(--font-display);
     font-size: var(--text-hero);
     font-weight: 800;
     line-height: 1.02;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     margin-top: auto;
     text-wrap: balance;
@@ -70,6 +71,7 @@ const lastName = rest.join(" ");
   }
 
   .comment {
+    font-family: var(--font-mono);
     color: var(--accent-deep);
     font-style: italic;
   }
@@ -77,6 +79,7 @@ const lastName = rest.join(" ");
   .dr-line {
     display: block;
     margin-top: 0.4rem;
+    font-family: var(--font-mono);
     font-size: var(--text-small);
     letter-spacing: 0.06em;
     color: var(--text-soft);
@@ -110,6 +113,7 @@ const lastName = rest.join(" ");
   }
 
   .stat dt {
+    font-family: var(--font-mono);
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -118,6 +122,7 @@ const lastName = rest.join(" ");
 
   .stat dd {
     margin: 0;
+    font-family: var(--font-display);
     font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
     font-weight: 700;
     color: var(--accent);
@@ -127,6 +132,7 @@ const lastName = rest.join(" ");
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+    font-family: var(--font-mono);
     font-size: var(--text-small);
     letter-spacing: 0.1em;
     color: var(--text-soft);

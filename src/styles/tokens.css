@@ -18,7 +18,9 @@
   --live: oklch(75% 0.18 145);
 
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-ui: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "Bricolage Grotesque", "Segoe UI", Helvetica, sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-ui: var(--font-body);
 
   --text-base: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
   --text-small: 0.75rem;
