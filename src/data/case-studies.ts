@@ -154,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "company", value: "GoTeam ↗", href: "https://go.team" },
       { label: "client", value: "Black Moth ↗", href: "https://www.blackmoth.com" },
     ],
-    stack: ["Node.js", "Express", "REST APIs"],
+    stack: ["Node.js", "Express", "REST APIs", "AWS S3"],
     sections: [
       {
         cmd: "$ cat problem.md",
@@ -167,7 +167,7 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "I built the backend services that give Black Moth's vision platform a <strong>memory of the road</strong>: each ride captures pothole snapshots, tied to the route, and the platform integrates with the truck's onboard machine. On the next run over the same route, the driver gets a vision of what's ahead — hazards spotted by the trucks that came before.",
+          "Black Moth's vision unit rides on the truck itself, watching the road. I built the backend that gives the platform a <strong>memory of the road</strong>: every pothole the onboard system spots is captured, tied to its route, and stored in <strong>AWS S3</strong>, then served through the APIs into the fleet's web application (AngularJS — my work sat behind it, on the backend). On the next run over the same route, the driver gets a vision of what's ahead — hazards spotted by the trucks that came before.",
           "Alongside the feature work: performance fixes across the backend (~20% faster API responses) and unit/integration test coverage as standard delivery.",
         ],
       },
