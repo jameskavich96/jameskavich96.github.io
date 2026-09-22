@@ -92,10 +92,11 @@ export const caseStudies: CaseStudy[] = [
     slug: "accenture",
     order: "02",
     title: { lead: "Retail Loyalty", accent: "at Scale" },
-    tagline: "// a nationwide retailer rewards platform + internal payroll file vault",
-    metaTitle: "Case Study: PMI Retail Loyalty & Payroll Vault — James Delos Reyes",
+    tagline:
+      "// appwards, PMI's nationwide retailer rewards platform + accenture's global payroll file vault",
+    metaTitle: "Case Study: PMI Appwards & Global Payroll Vault — James Delos Reyes",
     metaDescription:
-      "Enterprise work at Accenture: a retailer loyalty platform for Philip Morris International and an internal payroll document storage system.",
+      "Enterprise work at Accenture: Appwards, a retailer loyalty platform for Philip Morris International, and an internal payroll file-storage system used by Accenture offices globally.",
     facts: [
       { label: "role", value: "senior software engineer" },
       { label: "period", value: "2022 — 2025" },
@@ -108,15 +109,15 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
-          "Two very different enterprise problems. For <strong>Philip Morris International</strong>: thousands of local retailers across the Philippines sell PMI products, but the brand had no direct engagement channel with them. For an internal <strong>payroll operations team</strong>: payroll files lived scattered across shared drives with no dedicated, controlled home.",
+          "Two separate enterprise problems. For client <strong>Philip Morris International</strong>: thousands of local retailers across the Philippines sell PMI products, but the brand had no direct engagement channel with them. Internally at <strong>Accenture</strong>: payroll teams across the globe — Mexico, the Philippines, the UK, Ireland, and more — had no dedicated, controlled home for their payroll files.",
         ],
       },
       {
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "For PMI, I worked on the retailer loyalty platform behind <strong>ph.pmiandu.com</strong>: product packs carry promo codes, and retailers redeem them in the app to earn points — turning every pack sold into a touchpoint. Mobile-responsive React frontend against Node.js services, built for a nationwide retailer audience.",
-          "For payroll operations, I built a dedicated file-storage platform — OneDrive-like upload, organization, and retrieval, scoped to payroll's compliance needs rather than a general-purpose share.",
+          "For PMI, I worked on <strong>Appwards</strong>, the retailer loyalty platform behind <strong>ph.pmiandu.com</strong>: product packs carry promo codes, and retailers redeem them in the app to earn points — turning every pack sold into a touchpoint. Mobile-responsive React frontend against Node.js services, built for a nationwide retailer audience.",
+          "For Accenture's global payroll teams, I built a dedicated file-storage platform — OneDrive-like upload, organization, and retrieval, scoped to payroll's compliance needs rather than a general-purpose share, and serving offices across multiple countries.",
         ],
       },
       {
@@ -124,7 +125,8 @@ export const caseStudies: CaseStudy[] = [
         heading: "The outcome",
         paras: [],
         bullets: [
-          "The loyalty platform gave PMI a direct, measurable engagement channel with local retailers nationwide.",
+          "Appwards gave PMI a direct, measurable engagement channel with local retailers nationwide.",
+          "The payroll vault became the single controlled home for payroll files across Accenture offices globally.",
           "Deployment time across projects cut ~30% via CI/CD pipelines (Jenkins, Docker, AWS); load times improved ~25% through profiling and bottleneck resolution.",
           "PLACEHOLDER: retailer adoption / redemption volume, if you can share a number safely.",
         ],
