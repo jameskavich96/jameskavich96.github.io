@@ -1,8 +1,7 @@
 // Single source of truth for page content. Edit here, never in components.
 
-// TODO(james): replace with your real domain once you have one — used for
-// canonical URLs, Open Graph, JSON-LD, and llms.txt.
-export const SITE_URL = "https://jamesdelosreyes.dev";
+// Used for canonical URLs, Open Graph, JSON-LD, sitemap, and robots.txt.
+export const SITE_URL = "https://drjames.dev";
 
 export const profile = {
   name: "James",

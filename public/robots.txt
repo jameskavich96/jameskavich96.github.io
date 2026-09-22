@@ -3,6 +3,5 @@
 User-agent: *
 Allow: /
 
-# TODO(james): domain is a placeholder until you register one —
-# keep this in sync with SITE_URL in src/data/profile.ts
-Sitemap: https://jamesdelosreyes.dev/sitemap-index.xml
+# keep in sync with SITE_URL in src/data/profile.ts
+Sitemap: https://drjames.dev/sitemap-index.xml
