@@ -48,4 +48,5 @@ Familiar: Redis, BullMQ, Qdrant, RAG pipelines, Playwright, Strapi.
 ## Contact
 
 - Email: sabakhadhaoy@gmail.com
+- GitHub: https://github.com/jameskavich96
 - LinkedIn: https://www.linkedin.com/in/jamesakvich

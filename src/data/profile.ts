@@ -11,8 +11,7 @@ export const profile = {
   location: "Cebu, Philippines",
   email: "sabakhadhaoy@gmail.com",
   links: {
-    // TODO(james): add your GitHub username
-    github: "https://github.com/PLACEHOLDER",
+    github: "https://github.com/jameskavich96",
     linkedin: "https://www.linkedin.com/in/jamesakvich",
   },
   headline: {

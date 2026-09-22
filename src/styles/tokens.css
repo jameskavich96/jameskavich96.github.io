@@ -13,7 +13,8 @@
 
   --text-base: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
   --text-small: 0.75rem;
-  --text-hero: clamp(2.6rem, 1rem + 8.5vw, 7.5rem);
+  /* min sized so "DELOS REYES" fits unbroken at 320px */
+  --text-hero: clamp(2.4rem, 1rem + 8.5vw, 7.5rem);
   --text-role: clamp(1.15rem, 0.95rem + 1vw, 1.7rem);
 
   --space-section: clamp(5rem, 3rem + 8vw, 10rem);
