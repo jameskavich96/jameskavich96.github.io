@@ -16,8 +16,8 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/jamesakvich",
   },
   headline: {
-    lead: "Building the plumbing",
-    accent: "behind job matching.",
+    lead: "React frontends, Node backends,",
+    accent: "and the AI in between.",
   },
   stats: [
     { label: "Years shipping", value: "8+" },
