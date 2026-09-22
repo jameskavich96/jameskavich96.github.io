@@ -90,7 +90,7 @@ export const caseStudies: CaseStudy[] = [
           "Nine admin modules shipped on one coherent design system — new features now compose from existing primitives instead of starting from zero.",
           "The operations team runs approvals, moderation, messaging, and timesheet export in one place, with real-time updates replacing manual refresh-and-check loops — and AI chat support absorbing routine questions.",
           "Participants onboard, upload resumes, and refer people from their phones — the platform's growth loop is self-serve.",
-          "PLACEHOLDER: a concrete metric or a line of feedback from the operations team.",
+          // TODO(james): add a concrete metric or a line of ops-team feedback
         ],
       },
     ],
@@ -135,7 +135,7 @@ export const caseStudies: CaseStudy[] = [
           "Appwards gave PMI a direct, measurable engagement channel with local retailers nationwide.",
           "The payroll vault became the single controlled home for payroll files across Accenture offices globally.",
           "Deployment time across projects cut ~30% via CI/CD pipelines (Jenkins, Docker, AWS); load times improved ~25% through profiling and bottleneck resolution.",
-          "PLACEHOLDER: retailer adoption / redemption volume, if you can share a number safely.",
+          // TODO(james): retailer adoption / redemption volume, if shareable
         ],
       },
     ],
@@ -177,7 +177,7 @@ export const caseStudies: CaseStudy[] = [
         paras: [],
         bullets: [
           "Road hazards became fleet knowledge instead of per-driver surprises — every truck benefits from every previous run.",
-          "PLACEHOLDER: any number Blackmoth saw — fewer incident reports, maintenance savings, routes covered.",
+          // TODO(james): any number Blackmoth saw — incident reports, maintenance savings, routes covered
         ],
       },
     ],
@@ -260,7 +260,7 @@ export const caseStudies: CaseStudy[] = [
         bullets: [
           "Teller tools became web-based: updates ship once instead of per-machine, across every branch nationwide.",
           "The branch-local server + sync-tool architecture was retired — one central system replaced a per-branch replication layer.",
-          "PLACEHOLDER: scale numbers if you remember them — branch count, tellers, transactions/day.",
+          // TODO(james): scale numbers — branch count, tellers, transactions/day
         ],
       },
     ],
