@@ -70,11 +70,15 @@ const tabs = [
     tabs.forEach((t) => t.classList.toggle("active", t === byId.get(id)));
   };
 
+  let lastY = window.scrollY;
   const update = () => {
-    // back at the very top: drop any #hash from the URL
-    if (window.scrollY < 40 && location.hash) {
+    // drop the #hash only when ARRIVING at the top from below — not while a
+    // just-clicked anchor scroll is still departing from the top
+    const y = window.scrollY;
+    if (y < 40 && lastY >= 40 && location.hash) {
       history.replaceState(null, "", location.pathname);
     }
+    lastY = y;
     // at the very bottom, the last (short) section wins even if it never crosses the probe
     const atBottom =
       window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
