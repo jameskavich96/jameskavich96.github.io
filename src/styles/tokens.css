@@ -1,11 +1,11 @@
 :root {
-  /* terminal: warm near-black, phosphor-gray text, amber accent */
-  --bg: oklch(14% 0.008 80);
-  --panel: oklch(17.5% 0.01 80);
-  --text: oklch(88% 0.01 80);
-  --text-soft: oklch(62% 0.012 80);
-  --accent: oklch(78% 0.14 75);
-  --accent-deep: oklch(68% 0.15 70);
+  /* terminal: cold near-black, phosphor-gray text, surgical-teal accent */
+  --bg: oklch(14% 0.012 230);
+  --panel: oklch(17.5% 0.014 230);
+  --text: oklch(88% 0.008 210);
+  --text-soft: oklch(62% 0.014 215);
+  --accent: oklch(80% 0.13 185);
+  --accent-deep: oklch(67% 0.11 188);
   --line: oklch(100% 0 0 / 0.09);
   --grid: oklch(100% 0 0 / 0.035);
 
