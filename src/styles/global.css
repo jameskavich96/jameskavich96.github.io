@@ -60,6 +60,8 @@ img {
 .section {
   padding-block: calc(var(--space-section) / 2);
   border-top: 1px solid var(--line);
+  /* anchored sections land below the sticky titlebar + tabstrip */
+  scroll-margin-top: calc(var(--titlebar-h) + var(--tabs-h));
 }
 
 .section-grid {

@@ -57,6 +57,39 @@ const tabs = [
   <StatusBar />
 </div>
 
+<script>
+  // scroll-spy: highlight the tab of the section currently in view.
+  // rAF-throttled scroll handler over 5 anchors — cheap and deterministic.
+  const tabs = [...document.querySelectorAll<HTMLAnchorElement>(".tabstrip .tab")];
+  const byId = new Map(tabs.map((tab) => [tab.hash.slice(1), tab]));
+  const sections = [...byId.keys()]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  const setActive = (id: string) => {
+    tabs.forEach((t) => t.classList.toggle("active", t === byId.get(id)));
+  };
+
+  const update = () => {
+    // at the very bottom, the last (short) section wins even if it never crosses the probe
+    const atBottom =
+      window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    if (atBottom) {
+      setActive(sections[sections.length - 1].id);
+      return;
+    }
+    const probe = window.innerHeight * 0.35;
+    let current = sections[0];
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= probe) current = section;
+    }
+    if (current) setActive(current.id);
+  };
+
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+</script>
+
 <style>
   .ide-body {
     display: grid;
