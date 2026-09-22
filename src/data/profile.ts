@@ -20,7 +20,7 @@ export const profile = {
     lead: "React frontends, Node backends,",
     accent: "and the AI in between.",
   },
-  drLine: "DR. James — the development doctor. i diagnose, treat, and ship.",
+  drLine: "DR James — the development doctor. i diagnose, treat, and ship.",
   stats: [
     { label: "Years shipping", value: "8+" },
     { label: "Production systems built", value: "10+" },
