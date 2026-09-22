@@ -85,7 +85,7 @@ export const experience: Role[] = [
     summary:
       "Node.js/Express backend services for client work, incl. Black Moth — intelligent machine vision systems for mining and road infrastructure.",
     bullets: [
-      "Built the road-vision backend for Black Moth's machine vision platform: vehicle-mounted units detect road defects (potholes, cracks), captures land route-tied in AWS S3 and serve into the web app — so operators track defect growth and the next pass sees hazards coming.",
+      "Built the web-app backend for Black Moth's machine vision platform: their vehicle-mounted units detect road defects (potholes, cracks) into AWS S3 — my APIs served those captures into the operators' web app for defect review and tracking growth across passes.",
       "Debugged and resolved performance issues across the backend, improving API response times ~20%.",
       "Wrote unit and integration tests as standard delivery, collaborating with frontend developers on API design.",
     ],

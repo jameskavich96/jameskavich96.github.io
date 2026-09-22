@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     tagline: "// machine vision that logs every road defect, so the next pass sees it coming",
     metaTitle: "Case Study: Road Vision Backend for Black Moth — James Delos Reyes",
     metaDescription:
-      "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: vehicle-mounted cameras detect road defects, captures land in AWS S3, and the platform tracks defect growth across visits.",
+      "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: the web-application backend that serves vision-system captures from AWS S3 for defect review and tracking across visits.",
     facts: [
       { label: "role", value: "back end developer" },
       { label: "period", value: "2021 — 2022" },
@@ -167,7 +167,7 @@ export const caseStudies: CaseStudy[] = [
         cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
-          "Black Moth's camera units ride on the vehicles themselves, using machine vision to spot road defects as the fleet drives. I built the backend that gives the platform a <strong>memory of the road</strong>: every detection is captured, tied to its route, stored in <strong>AWS S3</strong>, and served through the APIs into the web application (AngularJS — my work sat behind it, on the backend) where operators review defects and compare passes over the same route. The next vehicle through gets a vision of what's ahead — hazards spotted by the ones that came before.",
+          "The detection is Black Moth's magic: camera units on the vehicles spot road defects with machine vision, and every capture lands route-tied in <strong>AWS S3</strong>. My piece was the <strong>web application's backend</strong> — the Node.js/Express APIs that turn that bucket of captures into something operators can actually use: served into the AngularJS web app to review defects, compare passes over the same route, and watch a road's condition change over time. The vision system gives the platform eyes; the web app's backend gives it a usable memory.",
           "Alongside the feature work: performance fixes across the backend (~20% faster API responses) and unit/integration test coverage as standard delivery.",
         ],
       },
