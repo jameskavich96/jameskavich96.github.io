@@ -1,144 +1,248 @@
 ---
+// First viewport: the name, the promise, the proof line, the ways in.
+// Copy holds the left ~52% on desktop so the map's PH / AU / US stations read beside it.
 import { profile } from "../data/profile";
+import Icon from "./ui/Icon.astro";
+
 const [first, ...rest] = profile.fullName.split(" ");
-const lastName = rest.join(" ");
 ---
 
-<header class="hero wrap">
-  <h1 class="headline">
-    {first}
-    <span class="accent">{lastName}</span>
+<section class="hero wrap" aria-labelledby="hero-name">
+  <h1 id="hero-name" class="name rise">
+    <span>{first}</span>
+    <span class="surname">{rest.join(" ")}</span>
   </h1>
 
-  <p class="tagline reveal">
-    <span class="comment">// {profile.drLine}</span>
-    <span class="dr-line"
-      >{profile.headline.lead.toLowerCase()} {profile.headline.accent}</span
-    >
+  <p class="meta mono rise">
+    <span>{profile.role}</span>
+    <span class="sep" aria-hidden="true"></span>
+    <span>{profile.location}</span>
   </p>
 
-  <dl class="stats reveal">
+  <div class="pitch rise step-2">
+    <p class="headline">
+      <span>{profile.headline.lead}</span>
+      <span class="accent">{profile.headline.accent}</span>
+    </p>
+    <p class="dr-line">{profile.drLine}</p>
+  </div>
+
+  <ul class="stats mono rise step-3">
     {
       profile.stats.map((s) => (
-        <div class="stat">
-          <dt>{s.label}</dt>
-          <dd>{s.value}</dd>
-        </div>
+        <li>
+          <span class="value">{s.value}</span> {s.label}
+        </li>
       ))
     }
-  </dl>
+  </ul>
 
-  <div class="byline reveal">
-    <span>{profile.role.toLowerCase()}</span>
-    <span aria-hidden="true">·</span>
-    <span>{profile.location.toLowerCase()}</span>
-    <span aria-hidden="true">·</span>
-    <a href={profile.links.github}>github</a>
-    <span aria-hidden="true">·</span>
-    <a href={profile.links.linkedin}>linkedin</a>
-    <span aria-hidden="true">·</span>
-    <a href={profile.links.resume} download>resume.pdf ↓</a>
+  <div class="actions rise step-3" data-wall-clear>
+    <a class="btn btn-primary" href={`mailto:${profile.email}`}>
+      email<Icon name="mail" />
+    </a>
+    <a class="btn" href={profile.links.resume} download>
+      resume.pdf<Icon name="download" />
+    </a>
+    <span class="socials">
+      <a class="link" href={profile.links.github} target="_blank" rel="noopener noreferrer">
+        github<Icon name="arrow-up-right" /><span class="sr-only">(opens in new tab)</span>
+      </a>
+      <a class="link" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
+        linkedin<Icon name="arrow-up-right" /><span class="sr-only">(opens in new tab)</span>
+      </a>
+    </span>
   </div>
-</header>
+</section>
 
 <style>
   .hero {
-    min-height: calc(88svh - var(--titlebar-h) - var(--tabs-h));
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
-    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem);
+    align-items: flex-start;
+    padding-top: calc(var(--nav-h) + clamp(1.25rem, 3vh, 3.5rem));
+    padding-bottom: clamp(2.5rem, 7vh, 4rem);
   }
 
-  .headline {
-    font-family: var(--font-display);
-    font-size: var(--text-hero);
-    font-weight: 800;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
+  /* ---------- name ---------- */
+
+  .name {
+    /* phones: "DELOS REYES" (~5.3em at this stretch) spans the gutters; wider screens: the shared hero size */
+    font-size: max(var(--text-hero), min((100vw - 2 * var(--gutter)) / 5.32, 4.5rem));
+    font-weight: 700;
+    font-stretch: 88%;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
     text-transform: uppercase;
-    margin-top: auto;
-    text-wrap: balance;
+    color: var(--text);
+    /* optical: pull the J and D stems onto the copy's left edge */
+    margin-left: -0.04em;
   }
 
-  .headline .accent {
-    color: var(--accent);
-    /* last name stays whole on its own line */
+  .name span {
     display: block;
+  }
+
+  .surname {
     white-space: nowrap;
   }
 
-  .tagline {
-    margin-top: 1.25rem;
-    font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.2rem);
-  }
-
-  .comment {
-    font-family: var(--font-mono);
-    color: var(--accent-deep);
-    font-style: italic;
-  }
-
-  .dr-line {
-    display: block;
-    margin-top: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.06em;
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin-top: clamp(1.1rem, 2.5vh, 1.6rem);
+    font-size: 0.8125rem;
     color: var(--text-soft);
   }
 
-  .stats {
-    margin-block: clamp(2rem, 5vw, 3.5rem) auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    border: 1px solid var(--line);
-    background: var(--panel);
+  .sep {
+    width: 1px;
+    height: 0.9em;
+    background: var(--line-strong);
   }
 
-  .stat {
-    padding: 1.1rem 1.4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
+  /* narrow phones: role over location, so the separator never dangles at a line end */
+  @media (max-width: 419px) {
+    .meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
 
-  .stat + .stat {
-    border-top: 1px solid var(--line);
-  }
-
-  @media (min-width: 768px) {
-    .stat + .stat {
-      border-top: none;
-      border-left: 1px solid var(--line);
+    .sep {
+      display: none;
     }
   }
 
-  .stat dt {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-soft);
+  /* ---------- the promise: a third of the name's size, normal width against its condensed bold ---------- */
+
+  .pitch {
+    margin-top: 1.25rem;
+    max-width: 34rem;
   }
 
-  .stat dd {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
-    font-weight: 700;
+  .headline {
+    font-size: clamp(1.35rem, 1rem + 1.1vw, 2rem);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  .headline span {
+    display: block;
+  }
+
+  .accent {
     color: var(--accent);
   }
 
-  .byline {
+  .dr-line {
+    margin-top: 1rem;
+    max-width: 30em;
+    color: var(--text-soft);
+    text-wrap: balance;
+  }
+
+  /* ---------- proof list + the ways in ---------- */
+
+  /* a three-line table: the one-line row needs ~600px, more than the copy column has beside the map */
+  .stats {
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 1.25rem;
+    padding: 0;
+    list-style: none;
+    color: var(--text-faint);
+  }
+
+  .value {
+    display: inline-block;
+    min-width: 3em;
+    color: var(--text);
+  }
+
+  .actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.1em;
-    color: var(--text-soft);
-    border-top: 1px solid var(--line);
-    padding-top: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .socials {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .socials .link {
+    min-height: 2.75rem;
+  }
+
+  /* desktop: the copy centres in the viewport and holds the left ~52%, where the map masks its trace off */
+  @media (min-width: 768px) {
+    .hero {
+      --copy-max: calc(52vw - max(0px, (100vw - 74rem) / 2) - var(--gutter));
+
+      justify-content: center;
+      padding-top: calc(var(--nav-h) + 3rem);
+    }
+
+    /* phones stay compact so the map's band fits under the copy; desktop breathes */
+    .pitch,
+    .stats {
+      margin-top: clamp(2rem, 5vh, 3rem);
+    }
+
+    .stats {
+      gap: 0.4rem;
+    }
+
+    .actions {
+      margin-top: 1.75rem;
+    }
+
+    .meta,
+    .pitch,
+    .stats,
+    .actions {
+      max-width: min(34rem, var(--copy-max));
+    }
+  }
+
+  /* the socials join the buttons' row once the column is wide enough to hold all four */
+  @media (min-width: 1024px) {
+    .socials {
+      width: auto;
+      margin-left: 0.75rem;
+    }
+  }
+
+  /* one quiet on-load rise, three steps; the map is the motion.
+     GroundTrack's HERO_SETTLE_MS assumes 560ms + 2 x 90ms */
+  @media (prefers-reduced-motion: no-preference) {
+    .rise {
+      animation: rise 560ms var(--ease-out-expo) both;
+    }
+
+    .step-2 {
+      animation-delay: 90ms;
+    }
+
+    .step-3 {
+      animation-delay: 180ms;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6rem);
+    }
   }
 </style>

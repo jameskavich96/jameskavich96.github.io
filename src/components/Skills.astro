@@ -1,48 +1,126 @@
 ---
+// Toolkit in three tiers, ranked by weight: Core as tiles, Working knowledge as tags, Familiar as a quiet line
 import { skills } from "../data/profile";
 
-const toKey = (label: string) => label.toLowerCase().replace(/\s+/g, "_");
+// data order is Core, Working knowledge, Familiar
+const tiers = ["core", "working", "familiar"];
 ---
 
-<section id="toolkit" class="section" aria-labelledby="skills-heading">
-  <div class="wrap section-grid">
-    <p class="kicker"><span class="no">04</span>toolkit.json</p>
-    <div class="reveal">
-      <h2 id="skills-heading" class="sr-only">Skills</h2>
-      <pre class="json"><code><span class="p">&#123;</span>
-{skills.map((group, gi) => (
-  <>  <span class="key">"{toKey(group.label)}"</span><span class="p">: [</span>
-{group.items.map((item, i) => (
-    <>    <span class="str">"{item}"</span><span class="p">{i < group.items.length - 1 ? "," : ""}</span>
-</>
-))}  <span class="p">]{gi < skills.length - 1 ? "," : ""}</span>
-</>
-))}<span class="p">&#125;</span></code></pre>
-    </div>
+<section id="toolkit" class="toolkit" aria-labelledby="skills-heading">
+  <h2 id="skills-heading" class="h-section">Toolkit</h2>
+  <div class="groups reveal">
+    {
+      skills.map((group, i) => (
+        <div class:list={["group", `group--${tiers[i] ?? "familiar"}`]}>
+          <h3 class="mono group-label">{group.label}</h3>
+          <ul class="items" role="list">
+            {group.items.map((item) => (
+              <li class:list={["item", tiers[i] === "working" && "tag"]}>
+                {item.split(" / ").map((part, j) => (
+                  <>
+                    {j > 0 && <span class="sep"> / </span>}
+                    {part}
+                  </>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
   </div>
 </section>
 
 <style>
-  .json {
-    font-family: var(--font-mono);
+  /* the band carries the padding; anchored jumps still land with air under the nav */
+  .toolkit {
+    scroll-margin-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .h-section {
+    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  }
+
+  /* three tiers stacked in the half column, heaviest first */
+  .groups {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* each tier after the first sits on its own hairline, label first */
+  .group + .group {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .group-label {
+    margin-bottom: 1rem;
+    color: var(--text-faint);
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0;
-    border: 1px solid var(--line);
-    background: var(--panel);
-    padding: 1.5rem clamp(1.25rem, 3vw, 2rem);
-    overflow-x: auto;
-    font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.95rem);
-    line-height: 2;
+    padding: 0;
+    list-style: none;
   }
 
-  .p {
-    color: var(--text-soft);
+  /* keep the spaces around the slash inside flex items */
+  .sep {
+    white-space: pre;
+    color: var(--text-faint);
   }
 
-  .key {
-    color: var(--syn-key);
+  /* Core: the weight of the section */
+  .group--core .items {
+    gap: 0.625rem;
   }
 
-  .str {
-    color: var(--syn-string);
+  .group--core .item {
+    padding: 0.6rem 0.9rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+  }
+
+  /* Working knowledge: the shared .tag */
+  .group--working .items {
+    gap: 0.5rem;
+  }
+
+  /* Familiar: a plain run of names, separated by small dots. Every item leads with its dot and the
+     list is pulled left by one dot-width under the group's clip, so no line starts or ends on a dot */
+  .group--familiar {
+    overflow: hidden;
+  }
+
+  .group--familiar .items {
+    gap: 0.5rem 0;
+    margin-left: calc(-1.6rem - 3px);
+  }
+
+  .group--familiar .item {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    color: var(--text-faint);
+  }
+
+  .group--familiar .item::before {
+    content: "";
+    width: 3px;
+    height: 3px;
+    margin-inline: 0.8rem;
+    border-radius: 50%;
+    background: var(--line-strong);
   }
 </style>

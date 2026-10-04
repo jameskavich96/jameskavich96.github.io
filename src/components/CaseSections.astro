@@ -1,0 +1,113 @@
+---
+// A case study's sections: heading column plus body, hairlines between them.
+import type { CaseStudySection } from "../data/case-studies";
+
+interface Props {
+  sections: CaseStudySection[];
+}
+
+const { sections } = Astro.props;
+
+// metric tokens (~30%, 10+ hours) read in mono lime
+const METRIC = /(~\d+%|\d+\+ hours)/;
+const METRIC_ALL = new RegExp(METRIC.source, "g");
+// paras are trusted HTML (<strong>), so they take the tokens as markup
+const markMetrics = (html: string) => html.replace(METRIC_ALL, '<span class="metric">$1</span>');
+---
+
+{
+  sections.map((section, i) => (
+    <section class="section case-section" aria-labelledby={`section-${i}`}>
+      <div class="section-grid">
+        <h2 id={`section-${i}`} class="h-section">
+          {section.heading}
+        </h2>
+        <div class="body">
+          {section.paras.map((para) => (
+            <p set:html={markMetrics(para)} />
+          ))}
+          {section.grid && (
+            <ul class="modules mono">
+              {section.grid.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {section.bullets && section.bullets.length > 0 && (
+            <ul class="outcomes">
+              {section.bullets.map((b) => (
+                <li>
+                  {b
+                    .split(METRIC)
+                    .map((part, j) => (j % 2 ? <span class="metric">{part}</span> : part))}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+  ))
+}
+
+<style>
+  .case-section + .case-section {
+    border-top: 1px solid var(--line);
+  }
+
+  .body {
+    max-width: var(--measure);
+  }
+
+  .body > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .body p {
+    color: var(--text-soft);
+  }
+
+  .body :global(.metric) {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* module names: a compact mono index, not cards */
+  .modules {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.75rem 1.5rem;
+    color: var(--text-soft);
+  }
+
+  .outcomes {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .outcomes li {
+    position: relative;
+    padding-left: 1.75rem;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .outcomes li::before {
+    content: "";
+    position: absolute;
+    left: 0.1rem;
+    top: 0.68em;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--text-faint);
+  }
+</style>

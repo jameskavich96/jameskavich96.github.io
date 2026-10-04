@@ -1,41 +1,42 @@
 :root {
-  /* editor: VSCode Dark+ inspired */
-  --bg: oklch(20% 0 0); /* editor ground ~#1e1e1e */
-  --panel: oklch(23% 0.002 260); /* sidebar / widgets ~#252526 */
-  --panel-2: oklch(26.5% 0.002 260); /* tabs / hover ~#2d2d2d */
-  --text: oklch(86% 0.005 250); /* ~#d4d4d4 */
-  --text-soft: oklch(62% 0.004 250); /* ~#858585 */
-  --line: oklch(100% 0 0 / 0.08);
+  /* ground: near-black with a green cast so the lime sits in it, not on it */
+  --bg: #0b0d0b;
+  --surface: #111411;
+  --surface-2: #161a16;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
 
-  --accent: oklch(68% 0.11 245); /* keyword blue ~#569cd6 */
-  --accent-deep: oklch(58% 0.09 245);
-  --syn-comment: oklch(63% 0.09 150); /* green ~#6a9955 */
-  --syn-string: oklch(72% 0.07 45); /* orange ~#ce9178 */
-  --syn-key: oklch(82% 0.06 240); /* light blue ~#9cdcfe */
-  --syn-func: oklch(85% 0.08 100); /* yellow ~#dcdcaa */
-  --syn-type: oklch(78% 0.09 180); /* teal ~#4ec9b0 */
-  --status-bg: oklch(55% 0.13 240); /* status bar ~#007acc */
-  --live: oklch(75% 0.18 145);
+  --text: #e9ece6;
+  --text-soft: #a3aa9f;
+  --text-faint: #7d857a;
 
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-display: "Bricolage Grotesque", "Segoe UI", Helvetica, sans-serif;
-  --font-body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-ui: var(--font-body);
+  /* the one accent: actions, the current role, metrics, the live trace, focus */
+  --accent: #c6f432;
+  --accent-ink: #0b0d0b;
+  --accent-dim: rgb(198 244 50 / 0.35);
 
-  --text-base: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
-  --text-small: 0.75rem;
-  /* min sized so "DELOS REYES" fits unbroken at 320px */
-  --text-hero: clamp(2.4rem, 1rem + 7vw, 6.5rem);
-  --text-role: clamp(1.15rem, 0.95rem + 1vw, 1.7rem);
+  /* the faint map behind everything */
+  --map-grid: rgb(255 255 255 / 0.035);
+  --map-coast: rgb(255 255 255 / 0.11);
 
-  --space-section: clamp(4rem, 2.5rem + 6vw, 8rem);
-  --gutter: clamp(1.25rem, 3.5vw, 3.5rem);
-  --measure: 68ch;
+  --font-sans: "Mona Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, Menlo, monospace;
 
-  --titlebar-h: 2.4rem;
-  --tabs-h: 2.6rem;
-  --status-h: 1.6rem;
+  --text-base: clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+  --text-lede: clamp(1.2rem, 1.05rem + 0.65vw, 1.55rem);
+  --text-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem);
+  /* "DELOS REYES" stays on one line at 320px */
+  --text-hero: clamp(2.6rem, 0.9rem + 6vw, 6rem);
 
-  --duration: 700ms;
+  --space-section: clamp(5rem, 3.5rem + 6vw, 10rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --measure: 66ch;
+  --radius: 2px;
+
+  --nav-h: 3.75rem;
+
+  --duration: 200ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "mona sans",
+        "createdAt": "2026-10-04T08:43:01.326Z",
+        "reason": "user confirmed: James picked Mona Sans in the font question on 2026-10-04"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-04T08:43:01.347Z",
+        "reason": "user confirmed: James's Mona Sans pick on 2026-10-04 stated 'Keep Geist Mono for labels'"
+      }
+    ]
+  }
+}

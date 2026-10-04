@@ -1,5 +1,23 @@
 @import "./tokens.css";
 
+/* self-hosted faces, latin subset (both SIL Open Font License, via Google Fonts) */
+@font-face {
+  font-family: "Mona Sans";
+  font-style: normal;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  src: url("/fonts/mona-sans-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
+}
+
 *,
 *::before,
 *::after {
@@ -10,100 +28,211 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  scrollbar-color: var(--surface-2) var(--bg);
+  /* anchored sections land below the fixed nav */
+  scroll-padding-top: var(--nav-h);
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: var(--text-base);
-  line-height: 1.75;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  /* room for the fixed status bar */
-  padding-bottom: var(--status-h);
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {
-  background: oklch(45% 0.09 245 / 0.85);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 a {
   color: inherit;
-  text-decoration-color: var(--line);
+  text-decoration-color: var(--line-strong);
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.25em;
-  transition: color 200ms ease, text-decoration-color 200ms ease;
+  transition:
+    color var(--duration) ease,
+    text-decoration-color var(--duration) ease;
 }
 
 a:hover {
-  color: var(--accent);
   text-decoration-color: var(--accent);
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 1px solid var(--accent);
+:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-img {
-  max-width: 100%;
+img,
+svg {
   display: block;
+  max-width: 100%;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text);
 }
 
 .wrap {
-  max-width: 72rem;
+  max-width: 74rem;
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
+/* ---------- sections ---------- */
+
 .section {
   padding-block: calc(var(--space-section) / 2);
-  border-top: 1px solid var(--line);
-  /* anchored sections land below the sticky titlebar + tabstrip */
-  scroll-margin-top: calc(var(--titlebar-h) + var(--tabs-h));
 }
 
+/* heading column + content column */
 .section-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 2rem 3rem;
+  gap: 1.5rem 4rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .section-grid {
-    grid-template-columns: 12rem minmax(0, 1fr);
+    grid-template-columns: 14rem minmax(0, 1fr);
   }
-}
 
-/* section kicker: a filename, comment-green like the editor gutter */
-.kicker {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--syn-comment);
-}
-
-.kicker .no {
-  color: var(--text-soft);
-  font-variant-numeric: tabular-nums;
-  margin-right: 0.6em;
-}
-
-.kicker .no::after {
-  content: " ·";
-}
-
-@media (min-width: 768px) {
-  .kicker {
+  .section-grid > .h-section {
     position: sticky;
-    top: calc(var(--titlebar-h) + var(--tabs-h) + 1rem);
+    top: calc(var(--nav-h) + 2rem);
     align-self: start;
   }
 }
 
-/* accessible hidden headings (shared) */
+.h-section {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* small uppercase mono: labels, dates, tags, metrics. Never body copy. */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- surfaces ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color var(--duration) ease;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+/* the live/current marker */
+.dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.15rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  transition:
+    border-color var(--duration) ease,
+    color var(--duration) ease,
+    background-color var(--duration) ease,
+    transform 80ms ease;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* the one primary action in a group */
+.btn-primary {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  color: var(--accent-ink);
+  background: color-mix(in oklab, var(--accent), white 22%);
+  border-color: color-mix(in oklab, var(--accent), white 22%);
+}
+
+/* text link with a trailing icon */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-soft);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -113,14 +242,13 @@ img {
   white-space: nowrap;
 }
 
-/* scroll reveal — transform/opacity only; hidden state gated on html.js
-   so content stays visible without JS (and in static snapshots) */
+/* one quiet entrance for content blocks; hidden state gated on html.js */
 html.js .reveal {
   opacity: 0;
-  transform: translateY(1.25rem);
+  transform: translateY(0.75rem);
   transition:
-    opacity var(--duration) var(--ease-out-expo),
-    transform var(--duration) var(--ease-out-expo);
+    opacity 700ms var(--ease-out-expo),
+    transform 700ms var(--ease-out-expo);
 }
 
 html.js .reveal.is-visible {
@@ -132,6 +260,7 @@ html.js .reveal.is-visible {
   html {
     scroll-behavior: auto;
   }
+
   html.js .reveal {
     opacity: 1;
     transform: none;

@@ -1,0 +1,129 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll dealt Mission Control. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Mission Control",
+      "kicker": "THE ROLL",
+      "lineage": "Apollo-era flight control room: projection wall, consoles, go/no-go",
+      "thesis": "Eight years of production systems run like flights: launched, tracked live, brought home.",
+      "palette": ["#13226b", "#f4d35e", "#a9b8ae", "#0e1512", "#e8f1e4", "#f2a93b"],
+      "materials": ["projection-wall ground-track map", "gray-green console metal", "inset CRT readouts", "engraved panel legends", "indicator lamps"],
+      "viewport": "Full-bleed ultramarine projection wall. A live ground-track trace sweeps the world map past Cebu, Australia and the US: that is the moving background. JAMES DELOS REYES is set in big engraved console caps, with a three-lamp telemetry strip for 8+ years, 10+ systems and 5 industries. Primary action is a lit EMAIL / RESUME console key row.",
+      "risk": "If the trace and the lamps get too cute it reads as a space-themed costume, not as proof.",
+      "raised": [
+        { "from": "challenger-tensegrity", "raise": "Every metric is pinned by a leader line to the system it measures. No floating stat tiles." },
+        { "from": "challenger-silk", "raise": "The projection wall owns the whole first viewport as one saturated field. No neutral near-black ground." },
+        { "from": "challenger-matchbook", "raise": "Each mission (role or case study) gets its own patch: one cover, one composition." },
+        { "from": "challenger-cereal", "raise": "Exactly one lamp is lit: the current mission reads IN FLIGHT and everything else is a logged flight." },
+        { "from": "challenger-darkroom", "raise": "Case studies run as fixed flight phases in order (problem, approach, outcome) with marked points, not tabs." }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Transit Network Map",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Vignelli / Beck schematic subway diagrams",
+      "thesis": "A career drawn as one transit network: every role a line, every shipped system a station, PH to AU to US.",
+      "palette": ["#f2f2ee", "#111111", "#e4322b", "#0f62c9", "#f5b700", "#00985f"],
+      "materials": ["schematic 45/90 lines", "station dots and interchanges", "enamel signage", "printed map legend"],
+      "viewport": "The whole viewport is the network map. Trains run the lines as the moving background, the name sits on the map legend, and the stations are clickable systems.",
+      "risk": "Familiar: transit-map résumés are a known infographic trope, and a light ground can drift corporate if the line colours are timid."
+    },
+    {
+      "id": "challenger-onebit",
+      "label": "One-Bit Desktop",
+      "verdict": "competitive",
+      "lineage": "early black-and-white desktop OS",
+      "thesis": "The portfolio as a 1-bit desktop: each system a window, dithered tone, marching-ants selection.",
+      "palette": ["#000000", "#ffffff", "#7f7f7f"],
+      "materials": ["ordered dither", "1px window chrome", "pixel icons"],
+      "viewport": "A dithered desktop with overlapping windows: about.txt open on top, case studies as folders, and the dither pattern drifting slowly.",
+      "case": "Holds audience recognition (instantly techy), but it swaps one OS costume for another after you left the IDE.",
+      "risk": "Desktop-OS portfolios are their own trope, and the costume can upstage the work.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-one-bit-desktop-hero.webp"
+    },
+    {
+      "id": "challenger-darkroom",
+      "label": "Darkroom Safelight",
+      "verdict": "declined",
+      "lineage": "photo printing darkroom",
+      "thesis": "Work develops through fixed stations under amber safelight.",
+      "palette": ["#c8641e", "#2a2a2a", "#f4efe6"],
+      "materials": ["amber wash", "silver print", "test strips"],
+      "viewport": "An amber field with a print emerging in the tray.",
+      "case": "Hiring managers don't recognise themselves in a darkroom, and it says photographer, not engineer.",
+      "kept": "Fixed stations in order: case studies run as flight phases with marked points.",
+      "risk": "Off-subject.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-darkroom-safelight-bay-hero.webp"
+    },
+    {
+      "id": "challenger-tensegrity",
+      "label": "Tensegrity Column",
+      "verdict": "declined",
+      "lineage": "kinetic sculpture",
+      "thesis": "The stack as forces in balance.",
+      "palette": ["#1a1a1a", "#d9d6cf", "#c8102e"],
+      "materials": ["carbon rods", "red cord", "concrete"],
+      "viewport": "A breathing column with force-value labels.",
+      "case": "An abstract metaphor that's weak on both recognition and clarity.",
+      "kept": "Leader-line annotations: metrics are pinned to what they measure.",
+      "risk": "Reads as an art piece.",
+      "hero": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column-hero.webp"
+    },
+    {
+      "id": "challenger-silk",
+      "label": "Silk Color Chords",
+      "verdict": "declined",
+      "lineage": "generative colour counterpoint",
+      "thesis": "Overlapping silk lanes as computed states.",
+      "palette": ["#2b3a8f", "#9e2b25", "#e9a825", "#fafafa"],
+      "materials": ["translucent silk", "sunlit paving"],
+      "viewport": "Banners crossing a bright courtyard.",
+      "case": "Beautiful, but it carries nothing about shipping systems.",
+      "kept": "Total colour commitment: the wall is one saturated field.",
+      "risk": "Decorative.",
+      "hero": "https://impeccable.style/worlds/cards/generative-art-computational-color-chord-counterpoint-hero.webp"
+    },
+    {
+      "id": "challenger-matchbook",
+      "label": "Matchbook Drawer",
+      "verdict": "declined",
+      "lineage": "club and hotel matchbooks",
+      "thesis": "Each place kept as a foil-stamped cover.",
+      "palette": ["#5c1a1b", "#1f4d3a", "#c9a24a"],
+      "materials": ["foil script", "striker strip"],
+      "viewport": "A fanned hand of covers.",
+      "case": "Nostalgic and off-audience.",
+      "kept": "One cover, one composition: a mission patch per role.",
+      "risk": "Kitsch.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-matchbook-drawer-hero.webp"
+    },
+    {
+      "id": "challenger-cereal",
+      "label": "Cereal Aisle",
+      "verdict": "declined",
+      "lineage": "supermarket planogram",
+      "thesis": "Saturated box facings competing for your eye.",
+      "palette": ["#d7261e", "#ffd400", "#ffffff"],
+      "materials": ["coated board", "starburst violators"],
+      "viewport": "A wall of boxes at eye height.",
+      "case": "Wrong register for senior engineering hiring.",
+      "kept": "One violator: a single lit lamp marks the current mission.",
+      "risk": "Toy-like.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-cereal-box-aisle-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A dark developer portfolio done impeccably: animated gradient-mesh background, big name, project cards.",
+    "palette": ["#0b0d12", "#e6e8ee", "#7c5cff"],
+    "materials": ["gradient mesh", "glass cards", "clean grid"],
+    "viewport": "Centred name and role over a slow-moving gradient, with a CTA pair and a project card grid below.",
+    "risk": "Indistinguishable from thousands of dev portfolios by design."
+  },
+  "steer": true
+}

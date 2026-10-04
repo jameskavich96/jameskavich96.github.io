@@ -2,8 +2,7 @@
 // TODO(james): everything marked PLACEHOLDER needs a real number or a fact-check.
 
 export interface CaseStudySection {
-  cmd: string; // shell-style kicker, e.g. "$ cat problem.md"
-  heading: string; // accessible heading (visually hidden)
+  heading: string; // visible phase heading
   paras: string[];
   bullets?: string[];
   grid?: string[]; // compact multi-column list (e.g. module names)
@@ -11,7 +10,7 @@ export interface CaseStudySection {
 
 export interface CaseStudy {
   slug: string;
-  order: string; // "01".."05" shown in the masthead
+  order: string; // "01".."05", shown as the mission designation M-0n
   title: { lead: string; accent: string };
   tagline: string;
   metaTitle: string;
@@ -26,14 +25,14 @@ export const caseStudies: CaseStudy[] = [
     slug: "jobvious",
     order: "01",
     title: { lead: "Jobvious", accent: "Platform" },
-    tagline: "// an AI-powered recruitment platform — admin, participant modules, and AI features",
+    tagline: "an AI-powered recruitment platform — admin, participant modules, and AI features",
     metaTitle: "Case Study: Jobvious Platform — James Delos Reyes",
     metaDescription:
       "Full-stack work across an AI-powered recruitment platform: a 9-module admin SPA built end-to-end, participant-facing modules, AI chat support, and real-time features.",
     facts: [
       { label: "role", value: "full stack developer" },
       { label: "period", value: "2025 — present" },
-      { label: "company", value: "Jobvious ↗", href: "https://itsjobvious.com" },
+      { label: "company", value: "Jobvious", href: "https://itsjobvious.com" },
     ],
     stack: [
       "React",
@@ -48,7 +47,6 @@ export const caseStudies: CaseStudy[] = [
     ],
     sections: [
       {
-        cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
           "Jobvious is an AI-powered recruitment and referral platform — a TypeScript workspace of eleven services: React SPAs, NestJS APIs, MySQL/Prisma, Redis, Socket.io, and OpenAI-powered matching with Qdrant vector search. I work across the whole surface: the participant experience, the operations team's admin tools, and the AI features in between.",
@@ -56,7 +54,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
           "I designed and built the new admin platform as a React + TypeScript SPA on a <strong>custom design system</strong> — tokens, primitives, and composed components on Radix UI, so all nine modules share one visual and interaction language:",
@@ -75,7 +72,6 @@ export const caseStudies: CaseStudy[] = [
         bullets: [],
       },
       {
-        cmd: "$ cat platform.md",
         heading: "Across the platform",
         paras: [
           "Beyond the admin: I shipped <strong>participant-facing modules</strong> — onboarding, resume upload, profile management, and referral workflows — as mobile-first UI on a reusable component architecture, and built <strong>AI chat support on OpenAI</strong> for profile completion, job-matching questions, and referral guidance.",
@@ -83,7 +79,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        cmd: "$ cat outcome.md",
         heading: "The outcome",
         paras: [],
         bullets: [
@@ -100,27 +95,25 @@ export const caseStudies: CaseStudy[] = [
     order: "02",
     title: { lead: "Retail Loyalty", accent: "at Scale" },
     tagline:
-      "// appwards, PMI's nationwide retailer rewards platform + a global internal file vault",
+      "appwards, PMI's nationwide retailer rewards platform + a global internal file vault",
     metaTitle: "Case Study: PMI Appwards & Global File Vault — James Delos Reyes",
     metaDescription:
       "Enterprise work at Accenture: Appwards, a retailer loyalty platform for Philip Morris International, and an internal file-storage system used by Accenture offices globally.",
     facts: [
       { label: "role", value: "senior software engineer" },
       { label: "period", value: "2022 — 2025" },
-      { label: "company", value: "Accenture ↗", href: "https://www.accenture.com/en" },
-      { label: "client", value: "Philip Morris International ↗", href: "https://www.pmi.com" },
+      { label: "company", value: "Accenture", href: "https://www.accenture.com/en" },
+      { label: "client", value: "Philip Morris International", href: "https://www.pmi.com" },
     ],
     stack: ["React", "Node.js", "MySQL", "PostgreSQL", "Jenkins", "Docker", "AWS"],
     sections: [
       {
-        cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
           "Two separate enterprise problems. For client <strong>Philip Morris International</strong>: thousands of local retailers across the Philippines sell PMI products, but the brand had no direct engagement channel with them. Internally at <strong>Accenture</strong>: teams across the globe — Mexico, the Philippines, the UK, Ireland, and more — had no dedicated, controlled home for their working files.",
         ],
       },
       {
-        cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
           "For PMI, I worked on <strong>Appwards</strong>, the retailer loyalty platform behind <strong>ph.pmiandu.com</strong>: product packs carry promo codes, and retailers redeem them in the app to earn points — turning every pack sold into a touchpoint. Mobile-responsive React frontend against Node.js services, built for a nationwide retailer audience.",
@@ -128,7 +121,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        cmd: "$ cat outcome.md",
         heading: "The outcome",
         paras: [],
         bullets: [
@@ -144,27 +136,25 @@ export const caseStudies: CaseStudy[] = [
     slug: "goteam",
     order: "03",
     title: { lead: "Roads That", accent: "Remember" },
-    tagline: "// machine vision that logs every road defect, so the next pass sees it coming",
+    tagline: "machine vision that logs every road defect, so the next pass sees it coming",
     metaTitle: "Case Study: Road Vision Backend for Black Moth — James Delos Reyes",
     metaDescription:
       "Backend work at GoTeam for Black Moth, a leader in intelligent machine vision systems for mining and road infrastructure: the web-application backend that serves vision-system captures from AWS S3 for defect review and tracking across visits.",
     facts: [
       { label: "role", value: "back end developer" },
       { label: "period", value: "2021 — 2022" },
-      { label: "company", value: "GoTeam ↗", href: "https://go.team" },
-      { label: "client", value: "Black Moth ↗", href: "https://www.blackmoth.com" },
+      { label: "company", value: "GoTeam", href: "https://go.team" },
+      { label: "client", value: "Black Moth", href: "https://www.blackmoth.com" },
     ],
     stack: ["Node.js", "Express", "REST APIs", "AWS S3"],
     sections: [
       {
-        cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
           "Black Moth is a leader in rugged, intelligent <strong>machine vision systems</strong> for mining and road infrastructure. Their clients — councils managing road networks, operators running heavy vehicles — fight the same enemy: road defects. Potholes, cracks, and uneven surfaces damage vehicles, escalate if untreated, and were only as visible as the last manual inspection. The vehicles drove over the evidence every day; nothing captured it.",
         ],
       },
       {
-        cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
           "The detection is Black Moth's magic: camera units on the vehicles spot road defects with machine vision, and every capture lands route-tied in <strong>AWS S3</strong>. My piece was the <strong>web application's backend</strong> — the Node.js/Express APIs that turn that bucket of captures into something operators can actually use: served into the AngularJS web app to review defects, compare passes over the same route, and watch a road's condition change over time. The vision system gives the platform eyes; the web app's backend gives it a usable memory.",
@@ -172,7 +162,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        cmd: "$ cat outcome.md",
         heading: "The outcome",
         paras: [],
         bullets: [
@@ -187,33 +176,30 @@ export const caseStudies: CaseStudy[] = [
     slug: "tech-mahindra",
     order: "04",
     title: { lead: "One-Click", accent: "CSR Automation" },
-    tagline: "// a day of manual agent tasks, collapsed into one click",
+    tagline: "a day of manual agent tasks, collapsed into one click",
     metaTitle: "Case Study: One-Click CSR Automation — James Delos Reyes",
     metaDescription:
       "Automation at Tech Mahindra: turning customer service agents' repetitive manual day-to-day tasks into a semi-automated, one-click workflow.",
     facts: [
       { label: "role", value: "software engineer" },
       { label: "period", value: "2020 — 2021" },
-      { label: "company", value: "Tech Mahindra ↗", href: "https://www.techmahindra.com" },
+      { label: "company", value: "Tech Mahindra", href: "https://www.techmahindra.com" },
     ],
     stack: ["C#", ".NET", "React"],
     sections: [
       {
-        cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
           "Customer service agents spent their shifts on repetitive manual routines — the same sequence of lookups, copies, and data entry, task after task, day after day. The work was necessary; doing it by hand wasn't.",
         ],
       },
       {
-        cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
           "I built a C#/.NET application that <strong>semi-automates the agents' day-to-day routine into a single click</strong> — the app performs the web data collection and the repeated steps, the agent supervises and handles the judgment calls. I also automated email extraction that had been eating hours of manual work, and built a React web application for the recruitment team that replaced their manual workflows.",
         ],
       },
       {
-        cmd: "$ cat outcome.md",
         heading: "The outcome",
         paras: [],
         bullets: [
@@ -228,26 +214,24 @@ export const caseStudies: CaseStudy[] = [
     order: "05",
     title: { lead: "Nationwide", accent: "Teller Tools" },
     tagline:
-      "// the nationwide pawn system, moved from desktop to web — retiring the branch sync layer with it",
+      "the nationwide pawn system, moved from desktop to web — retiring the branch sync layer with it",
     metaTitle: "Case Study: Nationwide Teller Tools at M Lhuillier — James Delos Reyes",
     metaDescription:
       "Migrating M Lhuillier's nationwide pawn-system teller tools from a C# desktop app to a React web app, with Node.js APIs and a branch-to-HQ sync system.",
     facts: [
       { label: "role", value: "software engineer" },
       { label: "period", value: "2018 — 2020" },
-      { label: "company", value: "M Lhuillier ↗", href: "https://mlhuillier.com" },
+      { label: "company", value: "M Lhuillier", href: "https://mlhuillier.com" },
     ],
     stack: ["React", "Node.js", "C#"],
     sections: [
       {
-        cmd: "$ cat problem.md",
         heading: "The problem",
         paras: [
           "M Lhuillier's tellers ran pawn transactions on a C# desktop application — installed, updated, and maintained machine by machine, in branches all over the Philippines. Because the app was desktop-bound, every branch ran a <strong>local server</strong>, and an agent sync tool (which I maintained) pushed each branch's data to the in-house central server. Two systems, two failure surfaces, per-branch everything.",
         ],
       },
       {
-        cmd: "$ cat approach.md",
         heading: "The approach",
         paras: [
           "I migrated the pawn-system teller tools to a <strong>React web application</strong> and rewrote the existing C# APIs in Node.js — one deployment instead of thousands of desktop installs, with better performance and accessibility for the tellers using it daily.",
@@ -255,7 +239,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        cmd: "$ cat outcome.md",
         heading: "The outcome",
         paras: [],
         bullets: [

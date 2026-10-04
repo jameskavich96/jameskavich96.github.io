@@ -1,35 +1,40 @@
 ---
+// The About half of the About | Toolkit band (composed in AboutToolkit.astro).
 import { profile } from "../data/profile";
 ---
 
-<section id="about" class="section" aria-labelledby="about-heading">
-  <div class="wrap section-grid">
-    <p class="kicker"><span class="no">01</span>about.md</p>
-    <div class="reveal">
-      <h2 id="about-heading" class="sr-only">About</h2>
-      {profile.about.map((para, i) => <p class:list={["about-para", { lede: i === 0 }]} set:html={para} />)}
-    </div>
+<section id="about" class="about" aria-labelledby="about-heading">
+  <h2 id="about-heading" class="h-section">About</h2>
+  <div class="copy reveal">
+    {profile.about.map((para, i) => <p class={i === 0 ? "lede" : "body"} set:html={para} />)}
   </div>
 </section>
 
 <style>
-  .about-para {
-    max-width: var(--measure);
+  /* the band carries the padding; anchored jumps still land with air under the nav */
+  .about {
+    scroll-margin-top: clamp(1.5rem, 4vw, 3rem);
   }
 
-  .about-para + .about-para {
+  .h-section {
+    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  }
+
+  /* geography <strong>s take the global strong: 600, --text */
+  .lede {
+    max-width: 34em;
+    font-size: clamp(1.2rem, 1.1rem + 0.3vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-wrap: pretty;
+  }
+
+  .body {
+    max-width: var(--measure);
     margin-top: 1.5rem;
     color: var(--text-soft);
-  }
-
-  .about-para :global(strong) {
-    font-weight: 700;
-  }
-
-  .lede {
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 1rem + 0.8vw, 1.55rem);
-    line-height: 1.55;
-    font-weight: 600;
+    text-wrap: pretty;
   }
 </style>

@@ -1,176 +1,380 @@
 ---
+// Experience: five roles, newest first, as a compact timeline. One native <details> per role;
+// the current role (period ends in "Present") opens by default and carries the only lime marker.
 import { experience } from "../data/profile";
+import Icon from "./ui/Icon.astro";
+
+// metric tokens exactly as written in the bullets; odd split indices are the matches
+const METRIC = /(~\d+%|\d+\+ hours)/;
+const NOW = "Present";
 ---
 
 <section id="experience" class="section" aria-labelledby="experience-heading">
-  <div class="wrap section-grid">
-    <p class="kicker"><span class="no">02</span>experience.md</p>
-    <div>
-      <h2 id="experience-heading" class="sr-only">Experience</h2>
-      <ol class="roles">
-        {
-          experience.map((role, i) => (
-            <li class="role reveal">
-              <span class="ghost-no" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-              <div class="role-head">
-                <h3 class="role-title">
-                  {role.title}{" "}
-                  <a class="role-at" href={role.companyUrl} target="_blank" rel="noopener noreferrer"
-                    >@ {role.company}</a
-                  >
-                </h3>
-                <p class="role-period">{role.period}</p>
-              </div>
-              <p class="role-summary">{role.summary}</p>
-              {role.bullets.length > 0 && (
-                <ul class="role-bullets">
-                  {role.bullets.map((b) => (
-                    <li>{b}</li>
-                  ))}
-                </ul>
-              )}
-              <div class="role-refs">
-                {role.refs.map((ref) => {
-                  if (!ref.href) return <span class="ref-note">{ref.label}</span>;
-                  const external = ref.href.startsWith("http");
-                  return (
-                    <a
-                      href={ref.href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                    >
-                      {ref.label} <span aria-hidden="true">{external ? "↗" : "→"}</span>
-                    </a>
-                  );
-                })}
-              </div>
+  <div class="wrap">
+    <h2 id="experience-heading" class="h-section ex-heading">Experience</h2>
+    <ol class="timeline reveal" role="list" data-station-list>
+      {
+        experience.map((role) => {
+          const current = role.period.includes(NOW);
+          const [since] = role.period.split(NOW);
+          const outbound = role.refs.filter((r) => !r.href?.startsWith("/"));
+          // case study first, then the company site unless a ref already points there
+          const links = [
+            ...role.refs.filter((r) => r.href?.startsWith("/")),
+            ...(outbound.some((r) => r.href === role.companyUrl)
+              ? []
+              : [{ label: role.company, href: role.companyUrl }]),
+            ...outbound,
+          ];
+          return (
+            <li data-station={role.station}>
+              <details class="role" open={current}>
+                <summary>
+                  <span class="when mono">
+                    {current ? (
+                      <>
+                        <span class="dot" aria-hidden="true" />
+                        {since}
+                        <span class="now">{NOW}</span>
+                      </>
+                    ) : (
+                      role.period
+                    )}
+                  </span>
+                  <h3 class="who">
+                    <span class="co">{role.company}</span>{" "}
+                    <span class="title">{role.title}</span>
+                  </h3>
+                  <span class="station mono">{role.station}</span>
+                  <span class="sum">{role.summary}</span>
+                  <span class="toggle" aria-hidden="true" />
+                </summary>
+
+                <div class="body">
+                  {role.bullets.length > 0 && (
+                    <ul class="bullets" role="list">
+                      {role.bullets.map((b) => (
+                        <li>
+                          {b.split(METRIC).map((part, j) => (j % 2 ? <span class="metric">{part}</span> : part))}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <div class="links">
+                    {links.map((ref) => {
+                      if (!ref.href) return <span class="mono ref-plain">{ref.label}</span>;
+                      if (ref.href.startsWith("/"))
+                        return (
+                          <a class="link ref-case" href={ref.href}>
+                            {ref.label}
+                            <span class="sr-only">: {role.company}</span>
+                            <Icon name="arrow-right" />
+                          </a>
+                        );
+                      return (
+                        <a class="link ref-out" href={ref.href} target="_blank" rel="noopener noreferrer">
+                          {ref.label}
+                          <Icon name="arrow-up-right" />
+                          <span class="sr-only">(opens in new tab)</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              </details>
             </li>
-          ))
-        }
-      </ol>
-    </div>
+          );
+        })
+      }
+    </ol>
   </div>
 </section>
 
+<script>
+  // the row under the pointer or keyboard lights its market on the map; leaving the list clears it
+  const list = document.querySelector<HTMLElement>("[data-station-list]");
+  const say = (code: string | null) =>
+    window.dispatchEvent(new CustomEvent("station:focus", { detail: code }));
+  const codeOf = (t: EventTarget | null) =>
+    t instanceof Element ? (t.closest<HTMLElement>("[data-station]")?.dataset.station ?? null) : null;
+
+  if (list) {
+    list.addEventListener("pointerover", (e) => {
+      const code = codeOf(e.target);
+      if (code) say(code);
+    });
+    // a touch lifts the pointer right away; keep the tapped row lit until focus moves on
+    list.addEventListener("pointerleave", (e) => e.pointerType !== "touch" && say(null));
+    list.addEventListener("focusin", (e) => say(codeOf(e.target)));
+    list.addEventListener("focusout", (e) => {
+      if (!list.contains(e.relatedTarget as Node | null)) say(null);
+    });
+  }
+</script>
+
 <style>
-  .roles {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 1.25rem;
+  .ex-heading {
+    margin-bottom: clamp(1.75rem, 1.25rem + 2vw, 3rem);
   }
 
-  .role {
-    position: relative;
-    border: 1px solid var(--line);
-    background: var(--panel);
-    padding: 1.75rem clamp(1.25rem, 3vw, 2.25rem);
-    overflow: hidden;
-    transition: border-color 250ms ease;
-  }
-
-  .role:hover {
-    border-color: var(--accent-deep);
-  }
-
-  .ghost-no {
-    position: absolute;
-    top: 0.25rem;
-    right: 0.75rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--line);
-    pointer-events: none;
-  }
-
-  .role-head {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.25rem 2rem;
-    padding-right: 3.5rem;
-  }
-
-  .role-title {
-    font-family: var(--font-display);
-    font-size: var(--text-role);
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-  }
-
-  .role-at {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .role-at:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-  }
-
-  .role-period {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-soft);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .role-summary {
-    margin-top: 0.6rem;
-    color: var(--text-soft);
-    max-width: var(--measure);
-  }
-
-  .role-bullets {
-    margin-top: 1.1rem;
+  .timeline {
     padding: 0;
     list-style: none;
-    max-width: var(--measure);
-    display: grid;
-    gap: 0.6rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  .role-bullets li {
-    padding-left: 1.4rem;
-    position: relative;
-  }
-
-  .role-bullets li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
-
-  .role-refs {
-    margin-top: 1.4rem;
-    padding-top: 1rem;
+  .timeline > li {
     border-top: 1px solid var(--line);
+  }
+
+  /* phones: period + station, then company/title, then the summary */
+  summary {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) 1.75rem;
+    grid-template-areas: "when station toggle" "who who toggle" "sum sum sum";
+    align-items: baseline;
+    gap: 0.3rem 1rem;
+    padding-block: 1.25rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .when {
+    grid-area: when;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .when .dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-right: 0.6rem;
+    vertical-align: 0.1em;
+  }
+
+  .now {
+    color: var(--accent);
+  }
+
+  .who {
+    grid-area: who;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .co,
+  .title {
+    display: block;
+  }
+
+  .title {
+    font-size: var(--text-small);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--text-soft);
+  }
+
+  .station {
+    grid-area: station;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  /* the station marker: a 6px outlined square, filled lime while its row lights the map */
+  .station::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.5em;
+    vertical-align: 0.1em;
+    border: 1px solid currentColor;
+    transition: background-color var(--duration) ease, border-color var(--duration) ease;
+  }
+
+  .sum {
+    grid-area: sum;
+    margin-top: 0.35rem;
+    color: var(--text-soft);
+  }
+
+  /* plus that folds into a minus */
+  .toggle {
+    grid-area: toggle;
+    align-self: center;
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--text-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    transition: border-color var(--duration) ease, color var(--duration) ease;
+  }
+
+  .toggle::before,
+  .toggle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 0.625rem;
+    height: 1px;
+    margin: auto;
+    background: currentColor;
+    transition: rotate 300ms var(--ease-out-expo);
+  }
+
+  .toggle::after {
+    rotate: 90deg;
+  }
+
+  [open] > summary .toggle::after {
+    rotate: 0deg;
+  }
+
+  summary:hover .toggle,
+  summary:focus-visible .toggle {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  li:hover .station::before,
+  li:focus-within .station::before {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ---------- expanded body ---------- */
+
+  .body {
+    padding-bottom: 1.75rem;
+  }
+
+  .bullets {
+    display: grid;
+    gap: 0.65rem;
+    max-width: var(--measure);
+    padding: 0.25rem 0 0;
+    list-style: none;
+    color: var(--text-soft);
+  }
+
+  .bullets li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  .bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.72em;
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--text-faint);
+  }
+
+  .metric {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 2rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.08em;
+    gap: 0 1.75rem;
+    margin-top: 1rem;
   }
 
-  .role-refs a {
-    color: var(--accent-deep);
-    text-decoration: none;
+  /* taller hit area without changing the look */
+  .links .link {
+    min-height: 2.75rem;
   }
 
-  .role-refs a:hover {
-    color: var(--accent);
-    text-decoration: underline;
+  .ref-case {
+    color: var(--text);
   }
 
-  .ref-note {
-    color: var(--text-soft);
+  .ref-plain {
+    align-self: center;
+    color: var(--text-faint);
+  }
+
+  .links :global(.icon) {
+    transition: transform var(--duration) var(--ease-out-expo);
+  }
+
+  /* ---------- wider: a table row ---------- */
+
+  @media (min-width: 768px) {
+    summary {
+      grid-template-columns: 11rem minmax(0, 1fr) 3.5rem 1.75rem;
+      grid-template-areas: "when who station toggle" ". sum sum .";
+      column-gap: 1.5rem;
+    }
+
+    .toggle {
+      align-self: start;
+    }
+
+    .body {
+      padding-left: 12.5rem; /* the period column + gap */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    summary {
+      grid-template-columns: 11rem minmax(0, 1fr) 3.5rem minmax(0, 1.4fr) 1.75rem;
+      grid-template-areas: "when who station sum toggle";
+    }
+
+    .sum {
+      margin-top: 0;
+    }
+
+    /* closed rows keep to one line; opening the row shows it whole */
+    .role:not([open]) .sum {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ref-case:hover :global(.icon) {
+      transform: translateX(3px);
+    }
+
+    .ref-out:hover :global(.icon) {
+      transform: translate(2px, -2px);
+    }
+
+    /* smooth open where the browser can size to auto; instant everywhere else */
+    @supports (interpolate-size: allow-keywords) {
+      .timeline {
+        interpolate-size: allow-keywords;
+      }
+
+      .role::details-content {
+        block-size: 0;
+        overflow: clip;
+        overflow-clip-margin: 0.5rem;
+        transition: block-size 400ms var(--ease-out-expo), content-visibility 400ms allow-discrete;
+      }
+
+      .role[open]::details-content {
+        block-size: auto;
+      }
+    }
   }
 </style>

@@ -1,41 +1,66 @@
 ---
+// The close: one big ask, the address, the actions, then a quiet colophon.
+import Icon from "./ui/Icon.astro";
 import { profile } from "../data/profile";
+
 const year = new Date().getFullYear();
+const mailto = `mailto:${profile.email}`;
+const external = { target: "_blank", rel: "noopener noreferrer" };
 ---
 
-<footer id="contact" class="section footer" aria-labelledby="contact-heading">
-  <div class="wrap">
-    <p class="kicker"><span class="no">05</span>contact.sh</p>
-    <h2 id="contact-heading" class="cta reveal">
-      <a href={`mailto:${profile.email}`}
-        ><span class="prompt" aria-hidden="true">$</span> let's talk<span class="cursor" aria-hidden="true"
-          >_</span
-        ></a
-      >
-    </h2>
-    <div class="colophon">
-      <span>{profile.email}</span>
-      <span>
-        <a href={profile.links.github}>github</a> · <a href={profile.links.linkedin}>linkedin</a> ·
-        <a href={profile.links.resume} download>resume.pdf ↓</a>
-      </span>
-      <span>© {year} {profile.fullName.toLowerCase()}</span>
+<footer id="contact" class="section contact" aria-labelledby="contact-heading">
+  <div class="wrap contact-inner">
+    <h2 id="contact-heading" class="cta"><a href={mailto}>let's talk</a></h2>
+    <a class="mail" href={mailto}>{profile.email}</a>
+
+    {/* two groups, so a narrow column wraps buttons and links as units, never one link alone */}
+    <div class="actions" role="group" aria-label="Contact">
+      <ul>
+        <li><a class="btn btn-primary" href={mailto}>email<Icon name="mail" /></a></li>
+        <li><a class="btn" href={profile.links.resume} download>resume.pdf<Icon name="download" /></a></li>
+      </ul>
+      <ul>
+        <li>
+          <a class="link" href={profile.links.github} {...external}
+            >github<Icon name="arrow-up-right" /><span class="sr-only">(opens in new tab)</span></a
+          >
+        </li>
+        <li>
+          <a class="link" href={profile.links.linkedin} {...external}
+            >linkedin<Icon name="arrow-up-right" /><span class="sr-only">(opens in new tab)</span></a
+          >
+        </li>
+      </ul>
     </div>
+
+    <p class="colophon mono">
+      <span class="status"><span class="dot" aria-hidden="true"></span>the dr. is in</span>
+      <span>© {year} {profile.fullName}</span>
+    </p>
   </div>
 </footer>
 
 <style>
-  .footer {
-    background: var(--panel);
+  .contact {
+    display: flex;
+    min-height: 70svh;
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .contact-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .cta {
-    margin-block: clamp(1.5rem, 4vw, 3rem);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1rem + 6.5vw, 6rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    /* phones: fills the gutter-to-gutter width; desktop: the 6rem display ceiling */
+    font-size: clamp(2.6rem, (100vw - 2 * var(--gutter)) / 4.25, 6rem);
+    font-weight: 700;
+    font-stretch: 88%;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
     text-transform: uppercase;
   }
 
@@ -43,35 +68,74 @@ const year = new Date().getFullYear();
     text-decoration: none;
   }
 
-  .prompt {
+  .cta a:hover {
     color: var(--accent);
   }
 
-  .cursor {
+  .cta a:focus-visible {
+    outline-offset: 0.12em;
+  }
+
+  .mail {
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 0.9rem + 0.6vw, 1.4rem);
+    color: var(--text-soft);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .mail:hover {
     color: var(--accent);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .cursor {
-      animation: blink 1.1s steps(1) infinite;
-    }
+  .actions {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    /* the colophon's minimum distance; auto margin below takes the rest */
+    margin-bottom: clamp(4rem, 8vw, 7rem);
   }
 
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
+  .actions,
+  .actions ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .actions ul {
+    list-style: none;
+    padding: 0;
   }
 
   .colophon {
+    align-self: stretch;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 2.5rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.1em;
-    color: var(--text-soft);
-    border-top: 1px solid var(--line);
-    padding-top: 1.25rem;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    color: var(--text-faint);
+  }
+
+  /* tablet up: the map masks its trace off the left 52vw and frames the stations right of it,
+     so the address and actions end at that line (the big ask may run a little past) */
+  @media (min-width: 768px) {
+    .contact-inner {
+      --clear: calc(52vw - max(var(--gutter), (100vw - 74rem) / 2 + var(--gutter)));
+    }
+
+    .mail,
+    .actions {
+      max-width: var(--clear);
+    }
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
   }
 </style>

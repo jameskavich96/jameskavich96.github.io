@@ -1,23 +1,24 @@
 ---
 import Base from "../layouts/Base.astro";
-import IdeShell from "../components/ide/IdeShell.astro";
+import GroundTrack from "../components/wall/GroundTrack.astro";
+import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
+import Work from "../components/Work.astro";
 import Experience from "../components/Experience.astro";
-import Skills from "../components/Skills.astro";
 import AiSection from "../components/AiSection.astro";
+import AboutToolkit from "../components/AboutToolkit.astro";
 import Footer from "../components/Footer.astro";
 ---
 
 <Base>
-  <IdeShell>
-    <Hero />
-    <main>
-      <About />
-      <Experience />
-      <AiSection />
-      <Skills />
-    </main>
-    <Footer />
-  </IdeShell>
+  <GroundTrack />
+  <Nav home />
+  <Hero />
+  <main>
+    <Work />
+    <Experience />
+    <AiSection />
+    <AboutToolkit />
+  </main>
+  <Footer />
 </Base>

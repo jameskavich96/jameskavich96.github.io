@@ -1,0 +1,431 @@
+---
+// The faint orbit map: a Pacific-centred ground-track plot, fixed behind the whole page.
+// Map units are degrees: x = lon mod 360, y = 90 - lat (see public/wall/land.svg).
+// The script frames the PH–AU–US region beside the copy, masks the trace off the text,
+// and lights a station when the page focuses it (prop `focus`, or a "station:focus" event).
+import { groundStations } from "../../data/profile";
+
+interface Props {
+  /** station code lit for the whole page, e.g. a case study's market */
+  focus?: "PH" | "AU" | "US";
+}
+
+const { focus } = Astro.props;
+const toX = (lon: number) => ((lon % 360) + 360) % 360;
+const step = (from: number, to: number, by: number) =>
+  Array.from({ length: Math.floor((to - from) / by) + 1 }, (_, i) => from + i * by);
+
+// graticule runs past the poles and repeats sideways so any framing stays gridded
+const meridians = step(-360, 720, 15);
+const parallels = step(-390, 570, 15);
+---
+
+<div class="wall" aria-hidden="true" data-wall data-focus={focus}>
+  <svg class="map-layer" viewBox="95 18 200 120" preserveAspectRatio="xMidYMid slice" data-layer>
+    <g class="grid">
+      {meridians.map((x) => <line x1={x} y1="-400" x2={x} y2="580" vector-effect="non-scaling-stroke" />)}
+      {parallels.map((y) => <line x1="-360" y1={y} x2="720" y2={y} vector-effect="non-scaling-stroke" />)}
+      <line class="equator" x1="-360" y1="90" x2="720" y2="90" vector-effect="non-scaling-stroke" />
+    </g>
+    <g class="land" data-land stroke-width="0.2">
+      <use href="/wall/land.svg#land" x="-360"></use>
+      <use href="/wall/land.svg#land"></use>
+      <use href="/wall/land.svg#land" x="360"></use>
+    </g>
+  </svg>
+
+  <!-- the moving layers are masked off the copy column (desktop) or above the map band (phones) -->
+  <div class="moving">
+    <svg class="map-layer" viewBox="95 18 200 120" preserveAspectRatio="xMidYMid slice" data-layer>
+      <path class="track-next" data-next vector-effect="non-scaling-stroke"></path>
+      <g class="trail" data-trail>
+        {[1, 2, 3, 4, 5].map((n) => <path class={`t${n}`} vector-effect="non-scaling-stroke" />)}
+      </g>
+    </svg>
+
+    <div class="overlay">
+      {
+        groundStations.map((s) => (
+          <div class="station" data-station data-code={s.code} data-lat={s.lat} data-lon={toX(s.lon)}>
+            <span class="station-dot" />
+            <span class="station-label">
+              <span class="code">{s.code}</span>
+              <span class="name">{s.name}</span>
+            </span>
+          </div>
+        ))
+      }
+      <div class="craft" data-craft></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { DEG, PERIOD_S, subPoint, angleBetween, wrapInto } from "./orbit";
+
+  const AOS_DEG = 15; // acquisition-of-signal radius around a station
+  const AOS_HOLD_MS = 1600;
+  const FRAME_MS = 1000 / 30;
+  const TRAIL_STEPS = 5; // stepped fade, see .t1–.t5
+  const TRAIL_FRACTION = 0.85; // of an orbit
+  const SAMPLES = 150;
+  const HERO_SETTLE_MS = 900; // hero entrance is 560ms + 2 x 90ms stagger
+  const MIN_BAND_PX = 160; // phones: smallest free band below the copy worth framing the map into
+  const COPY_EDGE = 0.52; // desktop: the copy column ends here (fraction of viewport width)
+
+  // map-unit focus box (PH, AU, US with room for the US label) and where it lands on screen
+  const FOCUS = { x0: 100, x1: 300, y0: 32, y1: 136 };
+
+  const wall = document.querySelector<HTMLElement>("[data-wall]");
+  if (wall) init(wall);
+
+  function init(wall: HTMLElement) {
+    const layers = [...wall.querySelectorAll<SVGSVGElement>("[data-layer]")];
+    const land = wall.querySelector<SVGGElement>("[data-land]")!;
+    const next = wall.querySelector<SVGPathElement>("[data-next]")!;
+    const trail = [...wall.querySelectorAll<SVGPathElement>("[data-trail] path")];
+    const craft = wall.querySelector<HTMLElement>("[data-craft]")!;
+    const stations = [...wall.querySelectorAll<HTMLElement>("[data-station]")].map((el) => ({
+      el,
+      code: el.dataset.code!,
+      x: Number(el.dataset.lon),
+      y: 90 - Number(el.dataset.lat),
+      lat: Number(el.dataset.lat) * DEG,
+      lon: Number(el.dataset.lon) * DEG,
+      seen: -Infinity,
+    }));
+
+    let view = { x: 0, y: 0, s: 1 };
+    // the drawn window is the 360° centred on the focus box, so PH–AU–US never split across a wrap
+    const wrap = (x: number) => wrapInto(x, (FOCUS.x0 + FOCUS.x1) / 2 - 180);
+
+    const place = (el: HTMLElement, x: number, y: number) => {
+      el.style.transform = `translate(${(wrap(x) - view.x) * view.s}px, ${(y - view.y) * view.s}px)`;
+    };
+
+    const frame = () => {
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      const bar = document.querySelector<HTMLElement>(".nav")?.offsetHeight ?? 60;
+      const wide = W >= 768;
+      // phones: frame the map into the free band below the page's first copy block;
+      // when that band is too thin, keep the half-screen framing and hide the stations
+      let bandTop = H * 0.5;
+      let crowded = false;
+      const clear = wide ? null : document.querySelector<HTMLElement>("[data-wall-clear]");
+      if (clear) {
+        const below = clear.getBoundingClientRect().bottom + window.scrollY + 16;
+        if (H * 0.98 - below >= MIN_BAND_PX) bandTop = Math.max(bandTop, below);
+        else crowded = true;
+      }
+      wall.classList.toggle("is-crowded", crowded);
+      wall.style.setProperty("--copy-edge", `${Math.round(W * COPY_EDGE)}px`);
+      wall.style.setProperty("--band-top", `${Math.round(bandTop)}px`);
+
+      // desktop: right of the copy column, under the nav; phone: the band chosen above
+      const t = wide
+        ? { x0: W * COPY_EDGE, x1: W * 0.98, y0: bar + H * 0.06, y1: H * 0.95 }
+        : { x0: 0, x1: W, y0: bandTop, y1: H * 0.98 };
+      const s = Math.min(
+        (t.x1 - t.x0) / (FOCUS.x1 - FOCUS.x0),
+        (t.y1 - t.y0) / (FOCUS.y1 - FOCUS.y0),
+      );
+      const x = (FOCUS.x0 + FOCUS.x1) / 2 - (t.x0 + t.x1) / 2 / s;
+      const y = (FOCUS.y0 + FOCUS.y1) / 2 - (t.y0 + t.y1) / 2 / s;
+      view = { x, y, s };
+      for (const layer of layers) layer.setAttribute("viewBox", `${x} ${y} ${W / s} ${H / s}`);
+      // coastline stays ~0.9px whatever the zoom (external <use> can't take vector-effect)
+      land.setAttribute("stroke-width", String(0.9 / s));
+      for (const st of stations) place(st.el, st.x, st.y);
+    };
+
+    // path through sampled points, broken where the track wraps the window edge
+    const pathFor = (from: number, to: number, n: number) => {
+      let d = "";
+      let prev = NaN;
+      for (let i = 0; i <= n; i++) {
+        const p = subPoint(from + ((to - from) * i) / n);
+        const x = wrap(p.x);
+        d += `${Math.abs(x - prev) > 180 || i === 0 ? "M" : "L"}${x.toFixed(2)},${p.y.toFixed(2)}`;
+        prev = x;
+      }
+      return d;
+    };
+
+    const draw = (sec: number, now: number, allLit = false) => {
+      const span = PERIOD_S * TRAIL_FRACTION;
+      const chunk = span / TRAIL_STEPS;
+      const perChunk = Math.ceil(SAMPLES / TRAIL_STEPS);
+      trail.forEach((path, i) => {
+        const from = sec - span + chunk * i;
+        path.setAttribute("d", pathFor(from, from + chunk, perChunk));
+      });
+      next.setAttribute("d", pathFor(sec, sec + PERIOD_S, SAMPLES));
+
+      const p = subPoint(sec);
+      place(craft, p.x, p.y);
+      for (const st of stations) {
+        if (angleBetween(st.lat, st.lon, p.lat, p.lon) < AOS_DEG * DEG) st.seen = now;
+        st.el.classList.toggle("is-aos", allLit || now - st.seen < AOS_HOLD_MS);
+      }
+    };
+
+    // focus: the page's own market (prop) plus whatever project is hovered or in view
+    const pinned = wall.dataset.focus ?? null;
+    const setFocus = (code: string | null) => {
+      for (const st of stations) st.el.classList.toggle("is-focus", st.code === (code ?? pinned));
+    };
+    window.addEventListener("station:focus", (e) => setFocus((e as CustomEvent<string | null>).detail));
+    setFocus(null);
+
+    // reading zone: between the first screen and the close, the trace dims and labels step back
+    // the close is the page's last full-width-free screen; reading ends as it rises into view
+    const close = document.getElementById("contact");
+    const syncReading = () => {
+      const H = window.innerHeight;
+      const y = window.scrollY;
+      const closing = close
+        ? close.getBoundingClientRect().top < H * 0.4
+        : document.documentElement.scrollHeight - y - H < H * 0.6;
+      wall.classList.toggle("is-past-top", y > H * 0.6);
+      wall.classList.toggle("is-reading", y > H * 0.6 && !closing);
+    };
+    window.addEventListener("scroll", syncReading, { passive: true });
+    syncReading();
+
+    frame();
+    window.addEventListener("resize", frame, { passive: true });
+    // re-measure once webfonts and the hero's entrance have settled the copy's final height
+    document.fonts?.ready.then(frame);
+    window.setTimeout(frame, HERO_SETTLE_MS);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // one composed frame: the trace mid-Pacific, every station lit
+      draw(PERIOD_S * 0.62, 0, true);
+      wall.classList.add("is-ready");
+      return;
+    }
+
+    // the map sits behind the whole page, so it runs whenever the tab is visible
+    let raf = 0;
+    let last = 0;
+    const origin = performance.now();
+    const tick = (now: number) => {
+      raf = requestAnimationFrame(tick);
+      if (now - last < FRAME_MS) return;
+      last = now;
+      draw((now - origin) / 1000, now);
+    };
+    const sync = () => {
+      if (!document.hidden && !raf) raf = requestAnimationFrame(tick);
+      if (document.hidden && raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
+    document.addEventListener("visibilitychange", sync);
+
+    draw(0, origin);
+    wall.classList.add("is-ready");
+    sync();
+  }
+</script>
+
+<style>
+  .wall {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .map-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+
+  /* trace, craft and stations never cross the copy: faded in right of the copy column on
+     desktop, below the band top on phones */
+  .moving {
+    position: absolute;
+    inset: 0;
+    transition: opacity 500ms ease;
+    -webkit-mask-image: linear-gradient(180deg, transparent var(--band-top, 50vh), #000 calc(var(--band-top, 50vh) + 2rem));
+    mask-image: linear-gradient(180deg, transparent var(--band-top, 50vh), #000 calc(var(--band-top, 50vh) + 2rem));
+  }
+
+  @media (min-width: 768px) {
+    .moving {
+      -webkit-mask-image: linear-gradient(90deg, transparent var(--copy-edge, 52vw), #000 calc(var(--copy-edge, 52vw) + 6vw));
+      mask-image: linear-gradient(90deg, transparent var(--copy-edge, 52vw), #000 calc(var(--copy-edge, 52vw) + 6vw));
+    }
+  }
+
+  /* reading zone: the trace steps back behind running copy */
+  .is-reading .trail,
+  .is-reading .track-next,
+  .is-reading .craft {
+    opacity: 0.3;
+    transition: opacity 500ms ease;
+  }
+
+  /* phones: the trace belongs to the first screen only; below it the map band would sit under copy */
+  @media (max-width: 767px) {
+    .is-past-top .moving,
+    .is-crowded .moving {
+      opacity: 0;
+    }
+  }
+
+  .grid line {
+    stroke: var(--map-grid);
+    stroke-width: 1;
+  }
+
+  .grid .equator {
+    stroke: rgb(255 255 255 / 0.07);
+    stroke-dasharray: 3 6;
+  }
+
+  /* coastline as open lines (public/wall/land.svg), no fill: no seam where the map copies join */
+  .land {
+    fill: none;
+    stroke: var(--map-coast);
+    stroke-linejoin: round;
+  }
+
+  .track-next {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+    stroke-dasharray: 1 6;
+    opacity: 0.22;
+  }
+
+  .trail path {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .trail .t1 {
+    opacity: 0.1;
+  }
+  .trail .t2 {
+    opacity: 0.2;
+  }
+  .trail .t3 {
+    opacity: 0.35;
+  }
+  .trail .t4 {
+    opacity: 0.55;
+  }
+  .trail .t5 {
+    opacity: 0.9;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+  }
+
+  .is-ready .overlay {
+    visibility: visible;
+  }
+
+  .station,
+  .craft {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+  }
+
+  .station-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    translate: -50% -50%;
+    border: 1px solid var(--text-faint);
+    background: var(--bg);
+    transition:
+      background-color 400ms ease,
+      border-color 400ms ease;
+  }
+
+  .station-label {
+    position: absolute;
+    left: 10px;
+    top: -0.65em;
+    display: inline-flex;
+    gap: 0.5em;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    opacity: 0.8;
+    transition:
+      color 400ms ease,
+      opacity 400ms ease;
+  }
+
+  /* below desktop the full names run off the framed map; codes carry it */
+  @media (max-width: 1023px) {
+    .station .name {
+      display: none;
+    }
+  }
+
+  /* no clear band below the copy: stations would peek between content blocks, so only the trace runs */
+  .is-crowded .station {
+    display: none;
+  }
+
+  /* reading zone: copy runs full width, so labels step back; a focused station keeps its lit dot */
+  .is-reading .station-label,
+  .is-reading .station.is-focus .station-label {
+    opacity: 0;
+  }
+
+  /* focus: the market of the project in hand */
+  .station.is-focus .station-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 5px rgb(198 244 50 / 0.14);
+  }
+
+  .station.is-focus .station-label {
+    color: var(--text);
+    opacity: 1;
+  }
+
+  /* acquisition of signal: the station lights while the trace is overhead */
+  .station.is-aos .station-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .station.is-aos .station-label {
+    color: var(--text-soft);
+    opacity: 1;
+  }
+
+  .craft::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px rgb(198 244 50 / 0.12);
+  }
+</style>

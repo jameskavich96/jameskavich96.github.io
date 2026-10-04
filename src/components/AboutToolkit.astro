@@ -1,0 +1,36 @@
+---
+// About | Toolkit: one calm band, two equal columns split by a hairline on desktop; stacked below.
+import About from "./About.astro";
+import Skills from "./Skills.astro";
+---
+
+<div class="about-toolkit wrap section">
+  <About />
+  <Skills />
+</div>
+
+<style>
+  .about-toolkit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(4rem, 3rem + 4vw, 5.5rem);
+  }
+
+  @media (min-width: 1024px) {
+    .about-toolkit {
+      position: relative;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    /* the divider: centred in the gutter, as tall as the content */
+    .about-toolkit::after {
+      content: "";
+      position: absolute;
+      inset-block: calc(var(--space-section) / 2);
+      left: 50%;
+      width: 1px;
+      background: var(--line);
+    }
+  }
+</style>

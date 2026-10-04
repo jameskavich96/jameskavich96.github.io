@@ -1,16 +1,15 @@
 ---
-// prose + pipeline diagram: AI shipped into products, not just AI-assisted coding
+// AI shipped into products: heading on top, then prose beside the matching pipeline (a hairline schematic)
 ---
 
 <section id="ai" class="section" aria-labelledby="ai-heading">
-  <div class="wrap section-grid">
-    <p class="kicker"><span class="no">03</span>ai.md</p>
-    <div class="ai-grid">
-      <div class="prose reveal">
-        <h2 id="ai-heading" class="sr-only">AI engineering</h2>
+  <div class="wrap">
+    <h2 id="ai-heading" class="h-section ai-heading">AI engineering</h2>
+    <div class="ai-cols">
+      <div class="prose">
         <p class="lede">
-          I don't just use AI to write code. <span class="accent-text"
-            >I ship AI inside the product — and make it behave.</span
+          I don't just use AI to write code. <strong
+            >I ship AI inside the product&nbsp;— and make it behave.</strong
           >
         </p>
         <p>
@@ -25,105 +24,310 @@
           touch data, fallbacks for when the model is wrong or slow, and observability so a bad
           answer is a bug report instead of a mystery.
         </p>
-        <p class="soft">
+        <p class="quiet">
           Currently going deeper down the stack — RAG pipelines, embedding strategy, and
           self-hosted models.
         </p>
       </div>
 
-      <figure class="diagram-panel reveal">
+      <figure class="plan card reveal">
         <figcaption class="sr-only">
           The matching pipeline: jobs and candidates are embedded via OpenAI, searched in Qdrant,
           and scored matches ship to production.
         </figcaption>
-        <pre class="diagram" aria-hidden="true">
-  job post         candidate
-      │                │
-      └───►<span class="d-key"> openai </span>◄───┘
-          embeddings
-               │
-               ▼
- ┌─<span class="d-key"> qdrant · vector search </span>─┐
- │   similarity, not         │
- │   keyword matching        │
- └─────────────┬─────────────┘
-               ▼
-<span class="d-key">  chat support (openai)</span>
-   ├─ profile completion
-   ├─ job-match questions
-   └─ referral guidance
-               │
-               ▼
-  ship ──► production <span class="d-live">● live</span>
-<span class="d-note">  # real users, every day</span></pre>
+        <div class="flow" aria-hidden="true">
+          <div class="inputs">
+            <span class="node">job post</span>
+            <span class="node">candidate</span>
+          </div>
+          <span class="merge"></span>
+          <span class="wire"></span>
+          <div class="node">openai<span class="sub">embeddings</span></div>
+          <span class="wire"></span>
+          <div class="node">qdrant<span class="sub">vector search</span></div>
+          <div class="tap">
+            <p class="note">similarity, not keyword matching</p>
+          </div>
+          <div class="node">
+            chat support <span class="sub">(openai)</span>
+            <ul class="branches">
+              <li>profile completion</li>
+              <li>job-match questions</li>
+              <li>referral guidance</li>
+            </ul>
+          </div>
+          <span class="wire wire--ship"><span class="wire-label">ship</span></span>
+          <div class="node node--dest">
+            production
+            <span class="live"><span class="dot"></span>live</span>
+          </div>
+          <p class="touchdown">real users, every day</p>
+        </div>
       </figure>
     </div>
   </div>
 </section>
 
 <style>
-  .ai-grid {
+  .ai-heading {
+    margin-bottom: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  }
+
+  /* stacked, then prose | pipeline; the schematic holds its place while the prose scrolls */
+  .ai-cols {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
+    gap: 3rem 4rem;
     align-items: start;
   }
 
   @media (min-width: 1024px) {
-    .ai-grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    .ai-cols {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     }
-  }
 
-  .lede {
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 1rem + 0.8vw, 1.55rem);
-    line-height: 1.55;
-    font-weight: 600;
-  }
-
-  .accent-text {
-    color: var(--accent);
+    .plan {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
   }
 
   .prose p {
     max-width: var(--measure);
+    color: var(--text-soft);
   }
 
   .prose p + p {
-    margin-top: 1.25rem;
+    margin-top: 1.1rem;
   }
 
-  .soft {
-    color: var(--text-soft);
+  .prose .lede {
+    margin-bottom: 2rem;
+    font-size: var(--text-lede);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
   }
 
-  .diagram-panel {
-    margin: 0;
-    border: 1px solid var(--line);
-    background: var(--panel);
-    padding: 1.5rem;
-    overflow-x: auto;
+  .lede strong {
+    display: block;
+    margin-top: 0.15em;
   }
 
-  .diagram {
-    margin: 0;
-    font-family: var(--font-mono);
+  .prose .quiet {
+    margin-top: 2rem;
+    padding-top: 1.1rem;
     font-size: var(--text-small);
-    line-height: 1.7;
-    color: var(--text-soft);
+    border-top: 1px solid var(--line);
   }
 
-  .d-key {
+  /* stacked, the card hugs the diagram instead of spanning the column */
+  .plan {
+    max-width: 30rem;
+    padding: clamp(1.75rem, 4vw, 2.5rem) clamp(0.875rem, 3vw, 2rem);
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 24rem;
+    margin-inline: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: 1.5;
+    color: var(--text-faint);
+  }
+
+  /* caps = a stage in the flow, lowercase = detail */
+  .node {
+    width: min(100%, 15rem);
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sub,
+  .branches {
+    font-weight: 400;
+    color: var(--text-faint);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* a sub-label alone in its node sits under the name; beside a branch list it stays inline */
+  .sub:only-child {
+    display: block;
+  }
+
+  /* two sources merge into one trunk */
+  .inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    width: 100%;
+  }
+
+  .inputs .node {
+    width: auto;
+  }
+
+  .merge {
+    width: 50%;
+    height: 1rem;
+    border: 1px solid var(--line-strong);
+    border-top: 0;
+  }
+
+  .wire {
+    position: relative;
+    width: 1px;
+    height: 1.75rem;
+    background: var(--line-strong);
+  }
+
+  /* arrowheads: a small step brighter than the hairline so the direction reads */
+  .wire::after,
+  .tap::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 7px;
+    height: 5px;
+    translate: -50% 0;
+    background: var(--text-faint);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  /* trunk segment that carries the annotation pinned to the qdrant node */
+  .tap {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    padding-bottom: 1.5rem;
+  }
+
+  .tap::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: calc(50% - 0.5px);
+    width: 1px;
+    background: var(--line-strong);
+  }
+
+  .note {
+    grid-column: 2;
+    position: relative;
+    margin-left: 1rem;
+    padding-top: 1.1rem;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* dashed leader ending in a square pin on the node's edge */
+  .note::before,
+  .note::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .note::before {
+    top: 0;
+    height: 0.85rem;
+    border-left: 1px dashed var(--text-faint);
+  }
+
+  .note::after {
+    top: -3px;
+    width: 5px;
+    height: 5px;
+    background: var(--text-faint);
+  }
+
+  .branches {
+    margin: 0.55rem 0 0.1rem 0.35rem;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .branches li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .branches li::before,
+  .branches li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    background: var(--line-strong);
+  }
+
+  .branches li::before {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .branches li:last-child::before {
+    bottom: auto;
+    height: 0.75em;
+  }
+
+  .branches li::after {
+    top: 0.75em;
+    width: 0.7rem;
+    height: 1px;
+  }
+
+  .wire--ship {
+    height: 2.5rem;
+  }
+
+  .wire-label {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    translate: 0 -55%;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .node--dest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--surface-2);
+  }
+
+  /* the only lime in this section */
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
     color: var(--accent);
-    font-weight: 600;
   }
 
-  .d-live {
-    color: oklch(75% 0.18 145);
+  .live .dot {
+    width: 0.4rem;
+    height: 0.4rem;
   }
 
-  .d-note {
-    font-style: italic;
+  .touchdown {
+    margin-top: 0.75rem;
+    text-align: center;
+    letter-spacing: 0.02em;
   }
 </style>

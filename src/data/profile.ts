@@ -32,6 +32,14 @@ export const profile = {
   ],
 };
 
+// Stations on the background orbit map: the markets the work ran in.
+// Coordinates are country/region centres, not office addresses.
+export const groundStations: { code: string; name: string; lat: number; lon: number }[] = [
+  { code: "PH", name: "Cebu", lat: 10.3, lon: 123.9 },
+  { code: "AU", name: "Australia", lat: -25.3, lon: 133.8 },
+  { code: "US", name: "United States", lat: 39.8, lon: -98.6 },
+];
+
 export interface Role {
   company: string;
   companyUrl: string;
@@ -41,11 +49,14 @@ export interface Role {
   bullets: string[];
   /** client/project references shown in the card footer; no href = plain label */
   refs: { label: string; href?: string }[];
+  /** ground-station code (groundStations) for the market the work ran in */
+  station: "PH" | "AU" | "US";
 }
 
 export const experience: Role[] = [
   {
     company: "Jobvious",
+    station: "US",
     companyUrl: "https://itsjobvious.com",
     title: "Full Stack Developer",
     period: "Apr 2025 — Present",
@@ -63,6 +74,7 @@ export const experience: Role[] = [
   },
   {
     company: "Accenture",
+    station: "PH",
     companyUrl: "https://www.accenture.com/en",
     title: "Senior Software Engineer",
     period: "Aug 2022 — Apr 2025",
@@ -79,6 +91,7 @@ export const experience: Role[] = [
   },
   {
     company: "GoTeam",
+    station: "AU",
     companyUrl: "https://go.team",
     title: "Back End Developer",
     period: "Jun 2021 — Aug 2022",
@@ -96,6 +109,7 @@ export const experience: Role[] = [
   },
   {
     company: "Tech Mahindra",
+    station: "PH",
     companyUrl: "https://www.techmahindra.com",
     title: "Software Engineer",
     period: "Mar 2020 — Jun 2021",
@@ -112,6 +126,7 @@ export const experience: Role[] = [
   },
   {
     company: "M Lhuillier Financial Services",
+    station: "PH",
     companyUrl: "https://mlhuillier.com",
     title: "Software Engineer",
     period: "Jun 2018 — Mar 2020",
