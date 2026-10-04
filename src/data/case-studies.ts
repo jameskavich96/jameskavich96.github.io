@@ -34,17 +34,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "period", value: "2025 — present" },
       { label: "company", value: "Jobvious", href: "https://itsjobvious.com" },
     ],
-    stack: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Tailwind",
-      "Radix UI",
-      "TanStack Query",
-      "Zustand",
-      "NestJS API",
-      "Socket.io",
-    ],
+    stack: ["React", "NestJS", "PostgreSQL"],
     sections: [
       {
         heading: "The problem",
@@ -105,7 +95,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "company", value: "Accenture", href: "https://www.accenture.com/en" },
       { label: "client", value: "Philip Morris International", href: "https://www.pmi.com" },
     ],
-    stack: ["React", "Node.js", "MySQL", "PostgreSQL", "Jenkins", "Docker", "AWS"],
+    stack: ["React", "Express.js", "C#", "Angular", "MySQL", "PostgreSQL"],
     sections: [
       {
         heading: "The problem",
@@ -146,7 +136,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "company", value: "GoTeam", href: "https://go.team" },
       { label: "client", value: "Black Moth", href: "https://www.blackmoth.com" },
     ],
-    stack: ["Node.js", "Express", "REST APIs", "AWS S3"],
+    stack: ["Express.js", "PostgreSQL", "Angular"],
     sections: [
       {
         heading: "The problem",
@@ -185,7 +175,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "period", value: "2020 — 2021" },
       { label: "company", value: "Tech Mahindra", href: "https://www.techmahindra.com" },
     ],
-    stack: ["C#", ".NET", "React"],
+    stack: ["React", "C#", ".NET", "MSSQL", "MySQL"],
     sections: [
       {
         heading: "The problem",
@@ -223,7 +213,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "period", value: "2018 — 2020" },
       { label: "company", value: "M Lhuillier", href: "https://mlhuillier.com" },
     ],
-    stack: ["React", "Node.js", "C#"],
+    stack: ["React", "C#", ".NET", "Express.js"],
     sections: [
       {
         heading: "The problem",

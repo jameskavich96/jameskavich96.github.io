@@ -149,7 +149,7 @@ export const skills: { label: string; items: string[] }[] = [
     items: [
       "TypeScript / JavaScript",
       "React",
-      "Node.js",
+      "Node.js / Express.js",
       "Tailwind / Radix UI",
       "TanStack Query / Zustand",
       "MySQL / PostgreSQL",
@@ -159,6 +159,8 @@ export const skills: { label: string; items: string[] }[] = [
     label: "Working knowledge",
     items: [
       "NestJS / Prisma",
+      "C# / .NET",
+      "Angular",
       "OpenAI API",
       "Socket.io",
       "Docker / GitHub Actions",
@@ -168,6 +170,6 @@ export const skills: { label: string; items: string[] }[] = [
   },
   {
     label: "Familiar",
-    items: ["Redis / BullMQ", "Qdrant (vector search)", "RAG pipelines", "Playwright", "Strapi"],
+    items: ["Redis / BullMQ", "Qdrant (vector search)", "RAG pipelines", "Playwright", "Strapi", "MSSQL"],
   },
 ];

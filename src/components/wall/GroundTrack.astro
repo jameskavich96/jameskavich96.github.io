@@ -185,12 +185,14 @@ const parallels = step(-390, 570, 15);
       const H = window.innerHeight;
       const y = window.scrollY;
       const closing = close
-        ? close.getBoundingClientRect().top < H * 0.4
+        ? close.getBoundingClientRect().top < H * 0.35
         : document.documentElement.scrollHeight - y - H < H * 0.6;
       wall.classList.toggle("is-past-top", y > H * 0.6);
       wall.classList.toggle("is-reading", y > H * 0.6 && !closing);
     };
     window.addEventListener("scroll", syncReading, { passive: true });
+    // an initial #anchor jump can land without a scroll event
+    window.addEventListener("load", syncReading);
     syncReading();
 
     frame();
@@ -390,8 +392,8 @@ const parallels = step(-390, 570, 15);
   }
 
   /* reading zone: copy runs full width, so labels step back; a focused station keeps its lit dot */
-  .is-reading .station-label,
-  .is-reading .station.is-focus .station-label {
+  .wall.is-reading .station .station-label,
+  .wall.is-reading .station:not(.is-focus) {
     opacity: 0;
   }
 
